@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+input[type="radio"]:checked + label {
+    background-color: #04af2f;
+    color: white;
+    font-weight: bold;
+}
+select {
+    direction: rtl;
+    background-position: left 0.5rem center;
+    padding-left: 20px;
+    text-align: right;
+}
+@font-face {
+    font-family: "amiri-bold";
+    src: url("/fonts/Amiri-Bold.ttf") format("ttf");
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: "amiri-reg";
+    src: url("/fonts/Amiri-Regular.ttf") format("ttf");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
