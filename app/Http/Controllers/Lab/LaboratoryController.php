@@ -41,7 +41,6 @@ class LaboratoryController extends Controller
             MedicalRecord::create([
                 'patient_id' => $lab->patient_id,
                 'descriptions' => [],
-                'doctor_id' => $lab->doctor_id,
                 'lab_tests' => [$newItemToAppend]
             ]);
         }
