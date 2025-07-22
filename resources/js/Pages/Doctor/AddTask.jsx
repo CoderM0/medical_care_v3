@@ -70,29 +70,33 @@ export default function AddTask({ employees, employee, tasks }) {
                     </div>
                     <div className="w-1/2 px-3">
                         <h1 className="text-center my-2">المهام غير المنجزة</h1>
-                        {tasks.map((task) => {
-                            return (
-                                <div
-                                    key={task.id}
-                                    className="w-full p-2 rounded-xl bg-white text-blue-500 my-2 border-2"
-                                >
-                                    {" "}
-                                    <p>
-                                        {"  الممرض  "}
-                                        <span className="text-black font-bold">
-                                            {" "}
-                                            {task.employee.name}{" "}
-                                        </span>
-                                    </p>
-                                    <p className="font-bold text-green-500 mt-3">
-                                        وصف المهمة
-                                    </p>
-                                    <p className="my-1 p-2">
-                                        {task.task_description}
-                                    </p>
-                                </div>
-                            );
-                        })}
+                        {tasks.length == 0 ? (
+                            <p>No UnDone Tasks Yet</p>
+                        ) : (
+                            tasks.map((task) => {
+                                return (
+                                    <div
+                                        key={task.id}
+                                        className="w-full p-2 rounded-xl bg-white text-blue-500 my-2 border-2"
+                                    >
+                                        {" "}
+                                        <p>
+                                            {"  الممرض  "}
+                                            <span className="text-black font-bold">
+                                                {" "}
+                                                {task.employee.name}{" "}
+                                            </span>
+                                        </p>
+                                        <p className="font-bold text-green-500 mt-3">
+                                            وصف المهمة
+                                        </p>
+                                        <p className="my-1 p-2">
+                                            {task.task_description}
+                                        </p>
+                                    </div>
+                                );
+                            })
+                        )}
                     </div>
                 </div>
             )}

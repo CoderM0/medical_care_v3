@@ -147,11 +147,6 @@ export default function AddDepartment({ departments, specialities, jobs }) {
                                                         <span className="text-lg font-medium">
                                                             {dep.title}
                                                         </span>
-                                                        <span className="text-sm mx-3 font-light text-gray-500">
-                                                            {new Date(
-                                                                dep.created_at
-                                                            ).toLocaleDateString()}
-                                                        </span>
                                                     </label>
                                                 </div>
                                                 <Link
@@ -247,11 +242,6 @@ export default function AddDepartment({ departments, specialities, jobs }) {
                                                     <span className="text-lg font-medium">
                                                         {special.title} -{" "}
                                                         {special.type}
-                                                    </span>
-                                                    <span className="text-sm mx-3 font-light text-gray-500">
-                                                        {new Date(
-                                                            special.created_at
-                                                        ).toLocaleDateString()}
                                                     </span>
                                                 </label>
                                                 <Link

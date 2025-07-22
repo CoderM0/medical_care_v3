@@ -80,7 +80,10 @@ export default function AdminLayout({ children }) {
                         active={route().current("admin.dashboard")}
                     >
                         <MdDashboard />
-                        <span className="text-center text-xl">لوحة التحكم</span>
+                        <span className="text-center text-xl">
+                            {" "}
+                            الصفحة الرئيسية
+                        </span>
                     </ListItem>
 
                     <LegendBox title={"الموظفين"}>

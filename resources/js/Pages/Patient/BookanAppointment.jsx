@@ -1,3 +1,4 @@
+import BackBtn from "@/Components/BackBtn";
 import PatientLayout from "@/Layouts/PatientLayout";
 import { useForm } from "@inertiajs/react";
 import { useEffect, useState } from "react";
@@ -55,7 +56,7 @@ export default function BookanAppointment({
                                                 for="card-number"
                                                 class="block text-sm font-medium text-gray-700 mb-2"
                                             >
-                                                الاعراض
+                                                الاعراض الأولية{" "}
                                             </label>
                                             <input
                                                 type="text"
@@ -133,11 +134,12 @@ export default function BookanAppointment({
                 ) : (
                     <>
                         {" "}
-                        <div className="bg-gray-50 shadow-sm">
-                            <h1 className="py-5 w-10/12 mx-auto font-bold">
+                        <div className="bg-gray-50 shadow-sm flex justify-between items-center px-16">
+                            <h1 className="py-5 font-bold">
                                 المواعيد المتاحة لدى الطبيب{" "}
                                 {doctor.employee.name}
                             </h1>
+                            <BackBtn />
                         </div>
                         <div className="flex justify-between w-10/12 mx-auto mt-5 border p-5 rounded-lg">
                             {availbaleSlotes.map((slot) => {

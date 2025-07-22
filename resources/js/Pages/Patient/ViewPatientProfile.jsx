@@ -1,3 +1,4 @@
+import BackBtn from "@/Components/BackBtn";
 import PatientLayout from "@/Layouts/PatientLayout";
 import { Link } from "@inertiajs/react";
 
@@ -68,6 +69,10 @@ export default function ViewPatientProfile({ patient }) {
                                     </svg>
                                 </span>
                                 <span className="tracking-wide">حول</span>
+                                <div className="flex justify-end w-full">
+                                    {" "}
+                                    <BackBtn />
+                                </div>
                             </div>
                             <div className="text-gray-700">
                                 <div className="grid md:grid-cols-2 text">
@@ -150,13 +155,8 @@ export default function ViewPatientProfile({ patient }) {
                                 </Link>
                             </div>
                         </div>
-                        {/* <!-- End of about section --> */}
 
                         <div className="my-4"></div>
-
-                        {/* <!-- Experience and education --> */}
-
-                        {/* <!-- End of profile tab --> */}
                     </div>
                 </div>
             </div>

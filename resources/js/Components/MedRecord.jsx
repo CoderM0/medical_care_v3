@@ -58,7 +58,7 @@ export default function MedRecord({ med_record }) {
                             {med_record.descriptions.map((desc, index) => {
                                 return (
                                     <div
-                                        key={index}
+                                        key={desc.id}
                                         className="border p-2 rounded-xl my-2 table w-full"
                                     >
                                         <div className="flex justify-between">

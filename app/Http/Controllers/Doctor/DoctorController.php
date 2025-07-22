@@ -132,6 +132,10 @@ class DoctorController extends Controller
     {
 
         $appointment->delete();
+        $patient = Patient::find($appointment->patient_id);
+        if ($patient->appointments()->count() === 0) {
+            $patient->update(['active' => false]);
+        }
         return redirect()->back();
     }
     public function ended_appointment()

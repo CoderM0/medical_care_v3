@@ -30,8 +30,9 @@ class PatientController extends Controller
     {
         $depemployees = Employee::with(['specialty', 'department', 'doctor'])->where('department_id', $department_id)->where('job_description_id', 1)->get();
 
-
-        return Inertia::render("Patient/ViewDepartment", ['patient' => Patient::with('user')->where('user_id', Auth::id())->first(), 'department_doctors' => $depemployees]);
+        $depdesc = Department::find($department_id);
+        $depdesc = $depdesc->description;
+        return Inertia::render("Patient/ViewDepartment", ['patient' => Patient::with('user')->where('user_id', Auth::id())->first(), 'department_doctors' => $depemployees, 'depdesc' => $depdesc]);
     }
     public function view_doctor_profile($employee_id)
     {

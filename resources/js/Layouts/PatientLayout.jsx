@@ -10,7 +10,7 @@ export default function PatientLayout({ children, patient }) {
     return (
         <div>
             <nav class="font-amirirg bg-gray-900 text-white py-3 px-4 flex items-center justify-between">
-                <Link>
+                <Link href={"/"}>
                     <ApplicationLogo className="text-white" />
                 </Link>
                 <div class="flex items-center gap-5">

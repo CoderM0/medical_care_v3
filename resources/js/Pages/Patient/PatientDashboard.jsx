@@ -2,10 +2,11 @@ import PatientLayout from "@/Layouts/PatientLayout";
 import { Link } from "@inertiajs/react";
 
 export default function PatientDashboard({ departments, patient }) {
+    console.log(patient);
     return (
         <PatientLayout patient={patient}>
             <div className="">
-                <p className="px-10 p-2 w-full border-t-2 bg-indigo-950 text-white text-center">
+                <p className="px-10 p-2 w-full border-t-2 text-indigo-950 underline text-center">
                     اقسام المشفى
                 </p>
                 <div
@@ -32,7 +33,8 @@ export default function PatientDashboard({ departments, patient }) {
                                             {dep.title}
                                         </h4>
                                         <p className="mt-2 text-gray-600 h-[50px]">
-                                            {dep.description.slice(0, 50)}
+                                            {dep.description.slice(0, 50) +
+                                                "..."}
                                         </p>
                                         <div className="mt-5">
                                             <Link

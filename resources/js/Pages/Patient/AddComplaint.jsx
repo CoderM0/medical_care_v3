@@ -82,17 +82,7 @@ export default function AddComplaint({ patient }) {
                                 }
                                 placeholder="نص الشكوى..."
                             ></textarea>
-                            {/* <div class="mb-4 flex justify-start gap-2">
-                            <button class="text-md rounded-lg border border-gray-200 px-2.5 py-1.5 hover:bg-gray-50">
-                                😞
-                            </button>
-                            <button class="text-md rounded-lg border border-gray-200 px-2.5 py-1.5 hover:bg-gray-50">
-                                😐
-                            </button>
-                            <button class="text-md rounded-lg border border-gray-200 px-2.5 py-1.5 hover:bg-gray-50">
-                                😊
-                            </button>
-                        </div> */}
+
                             <button class="w-full rounded-lg bg-gray-900 py-2.5 text-sm font-medium text-white transition duration-300 hover:bg-gray-800">
                                 تقديم
                             </button>

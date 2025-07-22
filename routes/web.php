@@ -13,7 +13,9 @@ use App\Http\Controllers\Patient\PatientController;
 use App\Http\Controllers\Pharma\PharmaController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Complaint;
+use App\Models\Doctor;
 use App\Models\Employee;
+use App\Models\Patient;
 use App\Models\Task;
 use App\Models\User;
 use Illuminate\Foundation\Application;
@@ -26,8 +28,8 @@ Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
+        'patient_num' => Patient::count(),
+        'doctors_num' => Doctor::count()
     ]);
 });
 

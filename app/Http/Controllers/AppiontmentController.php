@@ -76,6 +76,8 @@ class AppiontmentController extends Controller
             'doctor_id' => request()->reservation["doctor_id"],
             'patient_id' => $patient->id,
         ]);
+        $patient->active = true;
+        $patient->save();
         return redirect()->route("patient.view_appointments");
     }
     public function delete_appointment(Appointment $appointment)
@@ -92,6 +94,10 @@ class AppiontmentController extends Controller
             ]);
         });
         $appointment->delete();
+        $patient = Patient::find($pat_id);
+        if ($patient->appointments()->count() === 0) {
+            $patient->update(['active' => false]);
+        }
         return redirect()->back();
     }
 }

@@ -32,11 +32,11 @@ class AdminController extends Controller
 {
     public function index()
     {
-        $docs = count(Doctor::all()->pluck('id'));
-        $nurse = count(Nurse::all()->pluck('id'));
-        $pharmas = count(Pharma::all()->pluck('id'));
-        $ptients = count(Patient::all()->pluck('id'));
-        $labs = count(Laboratory::all()->pluck('id'));
+        $docs = Doctor::count();
+        $nurse = Nurse::count();
+        $pharmas = Pharma::count();
+        $ptients = Patient::count();
+        $labs = Laboratory::count();
         $nums = ['docs' => $docs, 'nurse' => $nurse, 'pharmas' => $pharmas, 'ptients' => $ptients, 'labs' => $labs];
 
         return Inertia::render("Admin/AdminDashboard", ['nums' => $nums]);
