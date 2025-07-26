@@ -27,3 +27,6 @@ select {
     font-style: normal;
     font-display: swap;
 }
+#toplevel {
+    scroll-behavior: smooth;
+}

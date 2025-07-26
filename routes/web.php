@@ -28,11 +28,13 @@ Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
-        'patient_num' => Patient::count(),
-        'doctors_num' => Doctor::count()
+
+        'doctors' => Doctor::with('employee.specialty')->limit(3)->get()
     ]);
 });
-
+Route::get("/about", function () {
+    return Inertia::render("AboutUs");
+})->name("home.about");
 Route::get('/dashboard', function () {
     return redirect()->route("doctor.dashboard");
     // return Inertia::render('Dashboard');
