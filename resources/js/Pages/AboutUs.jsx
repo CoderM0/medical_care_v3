@@ -1,8 +1,9 @@
-import { Link } from "@inertiajs/react";
+import { Head, Link } from "@inertiajs/react";
 
 export default function AboutUs() {
     return (
         <div className="font-amiribold text-right text-gray-800 bg-gray-50 min-h-screen flex flex-col justify-between">
+            <Head title="حول المنصة" />
             <nav className="bg-blue-800 text-white p-4 flex justify-between items-center shadow-lg sticky top-0 z-50">
                 <div className="text-xl font-bold">عن المنصة</div>
                 <ul className="flex gap-4 items-center">
