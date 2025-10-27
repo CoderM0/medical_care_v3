@@ -36,251 +36,324 @@ export default function EditEmployee({ departments, employee }) {
     // };
     return (
         <AdminLayout>
-            <div className="bg-white  border-4 rounded-lg shadow relative  h-[85vh] overflow-y-auto">
-                <div className="flex items-start justify-between p-5 border-b rounded-t sticky top-0 bg-white z-20">
-                    <h3 className="text-xl font-semibold ">
-                        تعديل معلومات ال
-                        {employee.job_description.job_title +
-                            " " +
-                            employee.name}
-                    </h3>{" "}
+            <div className="bg-white rounded-2xl shadow-md border border-gray-200 transition-all duration-300">
+                {/* الهيدر يبقى كما هو */}
+                <div className="flex items-center justify-between p-4 border-b bg-gradient-to-l from-primary/10 to-white sticky top-0 z-20 rounded-t-2xl">
+                    <h3 className="text-xl font-semibold text-primary">
+                        تعديل معلومات {employee.job_description.job_title}{" "}
+                        {employee.name}
+                    </h3>
                     <p
-                        className={`text-center text-xl text-green-500 duration-150 transition-opacity  ${
+                        className={`text-green-600 text-base transition-opacity duration-200 ${
                             succ ? "opacity-100" : "opacity-0"
                         }`}
                     >
-                        تم التحديث بنجاح
+                        ✅ تم التحديث بنجاح
                     </p>
                 </div>
+
                 {processing ? (
-                    <Loader />
+                    <div className="flex justify-center items-center h-[60vh]">
+                        <Loader />
+                    </div>
                 ) : (
-                    <div className="p-6 space-y-6">
-                        <form onSubmit={update_employee}>
-                            <div className="grid grid-cols-6 gap-6">
-                                <div className="col-span-6 flex justify-center">
-                                    <span class="relative inline-block">
-                                        <img
-                                            src={
-                                                newImg
-                                                    ? URL.createObjectURL(
-                                                          newImg
-                                                      )
-                                                    : `/storage/${employee.avatar}`
-                                            }
-                                            className="object-cover w-40 h-40 rounded-full "
-                                        />
-                                        <label
-                                            htmlFor="newimgfile"
-                                            className="cursor-pointer absolute bottom-0 right-0 w-10 h-10 bg-white border-2 border-gray-200 rounded-full flex justify-center items-center"
-                                        >
-                                            <BiSolidCameraPlus
-                                                color="green"
-                                                size={"1.5rem"}
+                    <div className="p-6">
+                        <form onSubmit={update_employee} className="space-y-6">
+                            {/* قسم الصورة والمعلومات الأساسية */}
+                            <div className="flex flex-col lg:flex-row gap-8">
+                                {/* الصورة على اليمين مع معلومات سريعة */}
+                                <div className="lg:w-1/3">
+                                    <div className="sticky top-24 space-y-6">
+                                        {/* الصورة */}
+                                        <div className="relative group text-center bg-gray-50 rounded-2xl p-6 border border-gray-200">
+                                            <img
+                                                src={
+                                                    newImg
+                                                        ? URL.createObjectURL(
+                                                              newImg
+                                                          )
+                                                        : `/storage/${employee.avatar}`
+                                                }
+                                                className="object-cover w-40 h-40 rounded-xl border-3 border-primary/30 shadow-md transition-all duration-300 group-hover:scale-105 mx-auto"
                                             />
-                                        </label>
-                                    </span>
-                                </div>
-                                <TextInput
-                                    type="file"
-                                    onChange={(e) => {
-                                        setData("imgfile", e.target.files[0]);
-                                        setNewImg(e.target.files[0]);
-                                    }}
-                                    id="newimgfile"
-                                    className="hidden"
-                                />
-                                <div className="col-span-6 sm:col-span-3">
-                                    <label
-                                        htmlFor="name"
-                                        className="text-sm font-medium text-gray-900 block mb-2"
-                                    >
-                                        الاسم
-                                    </label>
-                                    <TextInput
-                                        type="text"
-                                        name="name"
-                                        value={data.name}
-                                        onChange={(e) =>
-                                            setData("name", e.target.value)
-                                        }
-                                        id="name"
-                                        className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
-                                        placeholder="احمد محمد"
-                                    />
-                                    <InputError
-                                        message={errors.name}
-                                        className="mt-2"
-                                    />
-                                </div>
+                                            <label
+                                                htmlFor="newimgfile"
+                                                className="absolute bottom-6 right-6 w-12 h-12 bg-primary text-white rounded-full flex justify-center items-center shadow-lg cursor-pointer hover:bg-primary/90 transition-all hover:scale-110"
+                                            >
+                                                <BiSolidCameraPlus size="1.4rem" />
+                                            </label>
+                                        </div>
 
-                                <div className="col-span-6 sm:col-span-3">
-                                    <label
-                                        htmlFor="department_id"
-                                        className="text-sm font-medium text-gray-900 block mb-2"
-                                    >
-                                        القسم
-                                    </label>
-                                    <select
-                                        name="department_id"
-                                        id="department_id"
-                                        value={data.department_id}
-                                        onChange={(e) =>
-                                            setData(
-                                                "department_id",
-                                                e.target.value
-                                            )
-                                        }
-                                        className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
-                                        required=""
-                                    >
-                                        {departments.map((el) => {
-                                            return (
-                                                <option
-                                                    key={el.id}
-                                                    value={el.id}
-                                                    selected={
-                                                        el.id ==
-                                                        data.department_id
+                                        {/* معلومات سريعة */}
+                                        <div className="bg-gray-50 rounded-2xl p-6 border border-gray-200 space-y-4">
+                                            <div className="text-center">
+                                                <p className="text-lg font-semibold text-gray-800">
+                                                    {employee.name}
+                                                </p>
+                                                <p className="text-primary font-medium mt-1">
+                                                    {
+                                                        employee.job_description
+                                                            .job_title
                                                     }
-                                                >
-                                                    {el.title}
-                                                </option>
-                                            );
-                                        })}
-                                    </select>
-                                    <InputError
-                                        message={errors.department_id}
-                                        className="mt-2"
-                                    />
-                                </div>
-                                {/*  */}
+                                                </p>
+                                            </div>
 
-                                {/*  */}
-
-                                <div className="col-span-6 sm:col-span-3">
-                                    <label
-                                        htmlFor="license"
-                                        className="text-sm font-medium text-gray-900 block mb-2"
-                                    >
-                                        الشهادة
-                                    </label>
-                                    <TextInput
-                                        name="license"
-                                        id="license"
-                                        value={data.license}
-                                        onChange={(e) =>
-                                            setData("license", e.target.value)
-                                        }
-                                        className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
-                                        placeholder="جامعة طرطوس"
-                                        required=""
-                                    />
-                                    <InputError
-                                        message={errors.license}
-                                        className="mt-2"
-                                    />
-                                </div>
-                                <div className="col-span-6 sm:col-span-3">
-                                    <label
-                                        htmlFor="contact"
-                                        className="text-sm font-medium text-gray-900 block mb-2"
-                                    >
-                                        معلومات الاتصال
-                                    </label>
-                                    <TextInput
-                                        name="contact"
-                                        id="contact"
-                                        value={data.contact}
-                                        onChange={(e) =>
-                                            setData("contact", e.target.value)
-                                        }
-                                        className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
-                                        placeholder="+963********"
-                                        required=""
-                                    />
-                                    <InputError
-                                        message={errors.contact}
-                                        className="mt-2"
-                                    />
-                                </div>
-                                <div className="col-span-6 sm:col-span-3">
-                                    <label
-                                        htmlFor="address"
-                                        className="text-sm font-medium text-gray-900 block mb-2"
-                                    >
-                                        العنوان
-                                    </label>
-                                    <TextInput
-                                        name="address"
-                                        id="address"
-                                        value={data.address}
-                                        onChange={(e) =>
-                                            setData("address", e.target.value)
-                                        }
-                                        className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
-                                        placeholder="مدينة طرطوس"
-                                        required=""
-                                    />
-                                    <InputError
-                                        message={errors.address}
-                                        className="mt-2"
-                                    />
-                                </div>
-                                <div className="col-span-6 sm:col-span-3">
-                                    <label
-                                        htmlFor="salary"
-                                        className="text-sm font-medium text-gray-900 block mb-2"
-                                    >
-                                        الراتب
-                                    </label>
-                                    <TextInput
-                                        name="salary"
-                                        id="salary"
-                                        value={data.salary}
-                                        onChange={(e) =>
-                                            setData("salary", e.target.value)
-                                        }
-                                        className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
-                                        placeholder="الراتب بالدولار "
-                                        required=""
-                                    />
-                                    <InputError
-                                        message={errors.salary}
-                                        className="mt-2"
-                                    />
+                                            <div className="space-y-3 text-sm">
+                                                <div className="flex justify-between items-center py-2 border-b border-gray-200">
+                                                    <span className="text-gray-600">
+                                                        القسم:
+                                                    </span>
+                                                    <span className="font-medium text-gray-800">
+                                                        {
+                                                            departments.find(
+                                                                (d) =>
+                                                                    d.id ==
+                                                                    data.department_id
+                                                            )?.title
+                                                        }
+                                                    </span>
+                                                </div>
+                                                <div className="flex justify-between items-center py-2 border-b border-gray-200">
+                                                    <span className="text-gray-600">
+                                                        الراتب:
+                                                    </span>
+                                                    <span className="font-medium text-green-600">
+                                                        ${data.salary}
+                                                    </span>
+                                                </div>
+                                                <div className="flex justify-between items-center py-2">
+                                                    <span className="text-gray-600">
+                                                        الحالة:
+                                                    </span>
+                                                    <span className="font-medium text-green-600">
+                                                        نشط
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <div className="col-span-full">
-                                    <label
-                                        htmlFor="bio"
-                                        className="text-sm font-medium text-gray-900 block mb-2"
-                                    >
-                                        النبذة
-                                    </label>
-                                    <textarea
-                                        id="bio"
-                                        rows="6"
-                                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-4"
-                                        placeholder="النبذة"
-                                        value={data.bio}
-                                        onChange={(e) =>
-                                            setData("bio", e.target.value)
-                                        }
-                                    ></textarea>
-                                </div>
-                                {/*  */}
+                                {/* الحقول على اليسار */}
+                                <div className="lg:w-2/3">
+                                    <div className="space-y-6">
+                                        {/* الملف مخفي */}
+                                        <TextInput
+                                            type="file"
+                                            id="newimgfile"
+                                            onChange={(e) => {
+                                                setData(
+                                                    "imgfile",
+                                                    e.target.files[0]
+                                                );
+                                                setNewImg(e.target.files[0]);
+                                            }}
+                                            className="hidden"
+                                        />
 
-                                {/*  */}
+                                        {/* المجموعة الأولى: المعلومات الشخصية */}
+                                        <div className="bg-gray-50 rounded-2xl p-6 border border-gray-200">
+                                            <h4 className="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+                                                <span className="w-2 h-6 bg-primary rounded-full ml-2"></span>
+                                                المعلومات الشخصية
+                                            </h4>
+                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                                {/* الاسم */}
+                                                <div className="md:col-span-2">
+                                                    <label className="text-sm font-medium text-gray-700 block mb-2">
+                                                        الاسم الكامل
+                                                    </label>
+                                                    <TextInput
+                                                        value={data.name}
+                                                        onChange={(e) =>
+                                                            setData(
+                                                                "name",
+                                                                e.target.value
+                                                            )
+                                                        }
+                                                        className="w-full border border-gray-300 rounded-xl p-3 focus:ring-2 focus:ring-primary focus:border-primary transition-all"
+                                                        placeholder="أدخل الاسم الكامل"
+                                                    />
+                                                    <InputError
+                                                        message={errors.name}
+                                                        className="mt-2"
+                                                    />
+                                                </div>
+
+                                                {/* معلومات الاتصال */}
+                                                <div>
+                                                    <label className="text-sm font-medium text-gray-700 block mb-2">
+                                                        معلومات الاتصال
+                                                    </label>
+                                                    <TextInput
+                                                        value={data.contact}
+                                                        onChange={(e) =>
+                                                            setData(
+                                                                "contact",
+                                                                e.target.value
+                                                            )
+                                                        }
+                                                        className="w-full border border-gray-300 rounded-xl p-3 focus:ring-2 focus:ring-primary focus:border-primary transition-all"
+                                                        placeholder="+963********"
+                                                    />
+                                                    <InputError
+                                                        message={errors.contact}
+                                                        className="mt-2"
+                                                    />
+                                                </div>
+
+                                                {/* العنوان */}
+                                                <div>
+                                                    <label className="text-sm font-medium text-gray-700 block mb-2">
+                                                        العنوان
+                                                    </label>
+                                                    <TextInput
+                                                        value={data.address}
+                                                        onChange={(e) =>
+                                                            setData(
+                                                                "address",
+                                                                e.target.value
+                                                            )
+                                                        }
+                                                        className="w-full border border-gray-300 rounded-xl p-3 focus:ring-2 focus:ring-primary focus:border-primary transition-all"
+                                                        placeholder="مدينة دمشق"
+                                                    />
+                                                    <InputError
+                                                        message={errors.address}
+                                                        className="mt-2"
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {/* المجموعة الثانية: المعلومات الوظيفية */}
+                                        <div className="bg-gray-50 rounded-2xl p-6 border border-gray-200">
+                                            <h4 className="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+                                                <span className="w-2 h-6 bg-primary rounded-full ml-2"></span>
+                                                المعلومات الوظيفية
+                                            </h4>
+                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                                {/* القسم */}
+                                                <div>
+                                                    <label className="text-sm font-medium text-gray-700 block mb-2">
+                                                        القسم
+                                                    </label>
+                                                    <select
+                                                        value={
+                                                            data.department_id
+                                                        }
+                                                        onChange={(e) =>
+                                                            setData(
+                                                                "department_id",
+                                                                e.target.value
+                                                            )
+                                                        }
+                                                        className="w-full border border-gray-300 rounded-xl p-3 focus:ring-2 focus:ring-primary focus:border-primary text-gray-900 transition-all"
+                                                    >
+                                                        {departments.map(
+                                                            (el) => (
+                                                                <option
+                                                                    key={el.id}
+                                                                    value={
+                                                                        el.id
+                                                                    }
+                                                                >
+                                                                    {el.title}
+                                                                </option>
+                                                            )
+                                                        )}
+                                                    </select>
+                                                    <InputError
+                                                        message={
+                                                            errors.department_id
+                                                        }
+                                                        className="mt-2"
+                                                    />
+                                                </div>
+
+                                                {/* الراتب */}
+                                                <div>
+                                                    <label className="text-sm font-medium text-gray-700 block mb-2">
+                                                        الراتب (بالدولار)
+                                                    </label>
+                                                    <TextInput
+                                                        type="number"
+                                                        value={data.salary}
+                                                        onChange={(e) =>
+                                                            setData(
+                                                                "salary",
+                                                                e.target.value
+                                                            )
+                                                        }
+                                                        className="w-full border border-gray-300 rounded-xl p-3 focus:ring-2 focus:ring-primary focus:border-primary transition-all"
+                                                        placeholder="2000"
+                                                    />
+                                                    <InputError
+                                                        message={errors.salary}
+                                                        className="mt-2"
+                                                    />
+                                                </div>
+
+                                                {/* الشهادة */}
+                                                <div className="md:col-span-2">
+                                                    <label className="text-sm font-medium text-gray-700 block mb-2">
+                                                        الشهادة / المؤهل العلمي
+                                                    </label>
+                                                    <TextInput
+                                                        value={data.license}
+                                                        onChange={(e) =>
+                                                            setData(
+                                                                "license",
+                                                                e.target.value
+                                                            )
+                                                        }
+                                                        className="w-full border border-gray-300 rounded-xl p-3 focus:ring-2 focus:ring-primary focus:border-primary transition-all"
+                                                        placeholder="جامعة دمشق - كلية الهندسة المعلوماتية"
+                                                    />
+                                                    <InputError
+                                                        message={errors.license}
+                                                        className="mt-2"
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {/* المجموعة الثالثة: النبذة الشخصية */}
+                                        <div className="bg-gray-50 rounded-2xl p-6 border border-gray-200">
+                                            <h4 className="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+                                                <span className="w-2 h-6 bg-primary rounded-full ml-2"></span>
+                                                النبذة الشخصية
+                                            </h4>
+                                            <textarea
+                                                rows="4"
+                                                className="w-full border border-gray-300 rounded-xl p-3.5 focus:ring-2 focus:ring-primary focus:border-primary text-gray-900 transition-all"
+                                                placeholder="نبذة عن الموظف، المهارات، الخبرات، الإنجازات..."
+                                                value={data.bio}
+                                                onChange={(e) =>
+                                                    setData(
+                                                        "bio",
+                                                        e.target.value
+                                                    )
+                                                }
+                                            ></textarea>
+                                            <InputError
+                                                message={errors.bio}
+                                                className="mt-2"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div className="pt-4 border-t border-gray-200 rounded-b">
+
+                            {/* زر التحديث */}
+                            <div className="pt-6 border-t text-center">
                                 <button
-                                    className="block w-1/2 mx-auto text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                                     type="submit"
+                                    className="w-full sm:w-1/2 lg:w-1/3 mx-auto bg-primary text-white font-medium rounded-xl py-3.5 hover:bg-primary/90 focus:ring-4 focus:ring-primary/30 transition-all transform hover:scale-[1.02] shadow-md"
                                 >
-                                    تحديث
+                                    تحديث البيانات
                                 </button>
-                            </div>{" "}
+                            </div>
                         </form>
                     </div>
                 )}

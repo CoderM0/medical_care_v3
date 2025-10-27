@@ -1,169 +1,163 @@
-import ApplicationLogo from "@/Components/ApplicationLogo";
-import Dropdown from "@/Components/Dropdown";
-import LegendBox from "@/Components/LegendBox";
-import ListItem from "@/Components/ListItem";
 import { usePage } from "@inertiajs/react";
 // import { IoIosCloseCircleOutline } from "react-icons/io";
-import { HiMiniDocumentCurrencyDollar } from "react-icons/hi2";
 
-import { CgProfile } from "react-icons/cg";
-import { FaFileAlt } from "react-icons/fa";
-import { FaBoxArchive, FaUserPlus } from "react-icons/fa6";
-import { IoSettings } from "react-icons/io5";
+import { FaBoxArchive } from "react-icons/fa6";
 import {
-    MdDashboard,
-    MdDomainAdd,
-    MdOutlineInventory,
-    MdPayment,
-} from "react-icons/md";
+    FiArchive,
+    FiArrowUpRight,
+    FiFileText,
+    FiHome,
+    FiLogOut,
+    FiSettings,
+    FiUser,
+    FiUserPlus,
+    FiUsers,
+} from "react-icons/fi";
+import { MdDomainAdd } from "react-icons/md";
+import { TfiMoney } from "react-icons/tfi";
 
+import Accordion from "@/Components/Accordion";
+import ListNav from "@/Components/ListNav";
+
+import { Link } from "@inertiajs/react";
+import { BsPeople, BsSafe } from "react-icons/bs";
+import { FaHouseMedicalFlag } from "react-icons/fa6";
 export default function AdminLayout({ children }) {
     const user = usePage().props.auth.user;
 
     return (
-        <div className="h-screen overflow-hidden">
-            <div className="flex px-5 justify-between py-2 bg-gradient-to-tr from-indigo-900 to-indigo-600">
-                <div>
-                    <ApplicationLogo className="text-white" />
-                </div>
-                <div className="flex justify-end w-1/3">
-                    {/*  */}
-                    <div className="hidden sm:ms-6 sm:flex sm:items-center">
-                        <div className="relative ms-3">
-                            <Dropdown>
-                                <Dropdown.Trigger>
-                                    <span className="inline-flex rounded-md">
-                                        <button
-                                            type="button"
-                                            className="inline-flex items-center rounded-md border border-transparent  px-3 py-2 text-sm font-medium leading-4 text-gray-50 transition duration-150 ease-in-out hover:text-white focus:outline-none "
-                                        >
-                                            {"حسابي "}
-                                            <CgProfile size={"2rem"} />
-                                            <svg
-                                                className="-me-0.5 ms-2 h-4 w-4"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 20 20"
-                                                fill="currentColor"
-                                            >
-                                                <path
-                                                    fillRule="evenodd"
-                                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                    clipRule="evenodd"
-                                                />
-                                            </svg>
-                                        </button>
-                                    </span>
-                                </Dropdown.Trigger>
+        <div className="flex h-full min-h-screen bg-neutral-100 font-tajawal">
+            <div className="w-72 bg-primary flex flex-col items-center py-6 space-y-6 text-white rounded-l-2xl">
+                <i className="text-2xl">لوحة التحكم</i>
+                <Link
+                    href={route("admin.dashboard")}
+                    className={`flex gap-2 cursor-pointer items-center w-full px-8 py-2  ${
+                        route().current("admin.dashboard")
+                            ? " bg-blue-700"
+                            : " bg-blue-600"
+                    }  hover:bg-blue-700 text-white hover:text-white font-medium"
+                `}
+                >
+                    <FiHome />
+                    {"الرئيسية "}
+                </Link>
 
-                                <Dropdown.Content>
-                                    <Dropdown.Link href={route("profile.edit")}>
-                                        الملف الشخصي
-                                    </Dropdown.Link>
-                                    <Dropdown.Link
-                                        href={route("logout")}
-                                        method="post"
-                                        as="button"
-                                    >
-                                        تسجيل الخروج
-                                    </Dropdown.Link>
-                                </Dropdown.Content>
-                            </Dropdown>
-                        </div>
-                    </div>
-                    {/*  */}
-                </div>
-            </div>
-            <div className="flex">
-                <section className={`w-1/4 bg-white border-l-2 py-2 pl-5 pr-2`}>
-                    <ListItem
-                        href={route("admin.dashboard")}
-                        active={route().current("admin.dashboard")}
+                <Accordion
+                    title={"الموظفون"}
+                    routes={[
+                        "admin.add_employee",
+                        "admin.manage_employees",
+                        "admin.add_department",
+                    ]}
+                    icon={<FiUsers size={"1.2rem"} />}
+                >
+                    <ListNav
+                        href={route("admin.add_employee")}
+                        active={route().current("admin.add_employee")}
                     >
-                        <MdDashboard />
-                        <span className="text-center text-xl">
-                            {" "}
-                            الصفحة الرئيسية
-                        </span>
-                    </ListItem>
+                        <FiUserPlus size={"1.2rem"} />
+                        <p> إضافة موظف </p>
+                    </ListNav>
+                    <ListNav
+                        href={route("admin.manage_employees")}
+                        active={route().current("admin.manage_employees")}
+                    >
+                        <FiSettings size={"1.2rem"} />
+                        <p> إدارة الموظفين </p>
+                    </ListNav>
+                    <ListNav
+                        href={route("admin.add_department")}
+                        active={route().current("admin.add_department")}
+                    >
+                        <MdDomainAdd size={"1.2rem"} />
+                        <p> الاقسام والاختصاصات</p>
+                    </ListNav>
+                </Accordion>
 
-                    <LegendBox title={"الموظفين"}>
-                        <ListItem
-                            href={route("admin.add_employee")}
-                            active={route().current("admin.add_employee")}
-                        >
-                            <FaUserPlus />
-                            <span>إضافة موظف</span>
-                        </ListItem>{" "}
-                        <ListItem
-                            href={route("admin.manage_employees")}
-                            active={route().current("admin.manage_employees")}
-                        >
-                            <IoSettings />
-                            <span>إدارة الموظفين</span>
-                        </ListItem>{" "}
-                        <ListItem
-                            href={route("admin.add_department")}
-                            active={route().current("admin.add_department")}
-                        >
-                            <MdDomainAdd />
-                            <span>الأقسام والإختصاصات</span>
-                        </ListItem>{" "}
-                    </LegendBox>
-                    {/* <h1 className="font-bold">Doctors</h1> */}
+                <Accordion
+                    title={"السجلات"}
+                    routes={[
+                        "admin.manage_patients",
+                        "admin.inventory.index",
+                        "admin.safe.index",
+                        "admin.salary.index",
+                    ]}
+                    icon={<FiFileText size={"1.2rem"} />}
+                >
+                    <ListNav
+                        href={route("admin.manage_patients")}
+                        active={route().current("admin.manage_patients")}
+                    >
+                        <BsPeople size={"1.2rem"} />
+                        <p> المرضى</p>
+                    </ListNav>
+                    <ListNav
+                        href={route("admin.inventory.index")}
+                        active={route().current("admin.inventory.index")}
+                    >
+                        <FaHouseMedicalFlag size={"1.2rem"} />
 
-                    <LegendBox title={"السجلات"}>
-                        <ListItem
-                            href={route("admin.manage_patients")}
-                            active={route().current("admin.manage_patients")}
-                        >
-                            <FaFileAlt />
+                        <p> المستودع</p>
+                    </ListNav>
+                    <ListNav
+                        href={route("admin.safe.index")}
+                        active={route().current("admin.safe.index")}
+                    >
+                        <BsSafe size={"1.2rem"} />
 
-                            <span>المرضى</span>
-                        </ListItem>{" "}
-                        <ListItem
-                            href={route("admin.inventory.index")}
-                            active={route().current("admin.inventory.index")}
-                        >
-                            <MdOutlineInventory />
+                        <p> المالية</p>
+                    </ListNav>
+                    <ListNav
+                        href={route("admin.salary.index")}
+                        active={route().current("admin.salary.index")}
+                    >
+                        <TfiMoney size={"1.2rem"} />
+                        <p> الرواتب</p>
+                    </ListNav>
+                </Accordion>
 
-                            <span> المستودع</span>
-                        </ListItem>
-                        <ListItem
-                            href={route("admin.safe.index")}
-                            active={route().current("admin.safe.index")}
-                        >
-                            <HiMiniDocumentCurrencyDollar />
-
-                            <span> المالية</span>
-                        </ListItem>
-                        <ListItem
-                            href={route("admin.salary.index")}
-                            active={route().current("admin.salary.index")}
-                        >
-                            <MdPayment />
-
-                            <span> الرواتب</span>
-                        </ListItem>
-                    </LegendBox>
-
-                    {/*
-                    // <ListItem
-                    //     href={route("admin.dashboard")}
-                    //     active={route().current("nurse.dashboard")}
-                    // >
-                    //     Analytics
-                    // </ListItem> */}
-                    <ListItem
+                <Accordion
+                    title={"الشكاوي"}
+                    routes={["admin.complaints"]}
+                    icon={<FiArchive size={"1.2rem"} />}
+                >
+                    <ListNav
                         href={route("admin.complaints")}
                         active={route().current("admin.complaints")}
                     >
-                        <FaBoxArchive />
-
-                        <span className="text-center "> صندوق الشكاوي</span>
-                    </ListItem>
-                </section>
-                <main className="p-1 w-full h-full">{children}</main>
+                        <FaBoxArchive size={"1.2rem"} />
+                        <p> شكاوي المراجعين</p>
+                    </ListNav>
+                </Accordion>
+                <Link
+                    href={route("admin.profile")}
+                    className={`flex cursor-pointer justify-between items-center w-full px-4 py-2 ${
+                        route().current("admin.profile")
+                            ? " bg-blue-700"
+                            : " bg-blue-600"
+                    } hover:bg-blue-700  text-white font-medium rounded-md transition-colors duration-300"
+                    `}
+                >
+                    <div className="flex items-center px-2 gap-2 w-full">
+                        <FiUser size={"1.2rem"} />
+                        <p className="text-right">{"حسابي"}</p>
+                    </div>{" "}
+                    <FiArrowUpRight size={"1.2rem"} />
+                </Link>
+                <Link
+                    href={route("logout")}
+                    method="post"
+                    className="flex cursor-pointer justify-between items-center w-full px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-md transition-colors duration-300"
+                >
+                    <div className="flex items-center px-2 gap-2 w-full">
+                        <FiUser size={"1.2rem"} />
+                        <p className="text-right">{"تسجيل الخروج"}</p>
+                    </div>{" "}
+                    <FiLogOut size={"1.2rem"} />
+                </Link>
             </div>
+
+            <main className="p-1 w-full h-full">{children}</main>
         </div>
     );
 }

@@ -1,7 +1,6 @@
 import InputError from "@/Components/InputError";
 import InputLabel from "@/Components/InputLabel";
 import Loader from "@/Components/Loader";
-import TextInput from "@/Components/TextInput";
 import AdminLayout from "@/Layouts/AdminLayout";
 import { useForm } from "@inertiajs/react";
 import { useEffect, useState } from "react";
@@ -53,405 +52,433 @@ export default function AddDoctor({ auth, departments, specialities, jobs }) {
     };
     return (
         <AdminLayout auth={auth}>
-            <div className="bg-white  border-4 rounded-lg shadow relative  h-[85vh] overflow-y-auto">
-                <div className="flex items-start justify-between p-5 border-b rounded-t sticky top-0 bg-white z-20">
-                    <h3 className="text-xl font-semibold">أضف موظف</h3>{" "}
+            <div className="bg-white border rounded-2xl shadow-sm overflow-hidden">
+                {/* العنوان */}
+                <div className="flex items-center justify-between px-6 py-4 border-b bg-gradient-to-l from-primary/5 to-white sticky top-0 z-20">
+                    <h3 className="text-xl font-semibold text-primary flex items-center gap-2">
+                        <span className="w-2 h-6 bg-primary rounded-full"></span>
+                        إضافة موظف جديد
+                    </h3>
                     <p
-                        className={`text-center text-xl text-green-500 duration-150 transition-opacity  ${
+                        className={`text-green-600 text-sm transition-all duration-300 ${
                             succ ? "opacity-100" : "opacity-0"
                         }`}
                     >
-                        تمت الإضافة بنجاح
+                        ✅ تمت الإضافة بنجاح
                     </p>
                 </div>
 
-                <div className="p-6 space-y-6">
+                <div className="p-6">
                     {processing ? (
-                        <Loader />
+                        <div className="flex justify-center items-center py-12">
+                            <Loader />
+                        </div>
                     ) : (
-                        <form onSubmit={add_employee}>
-                            <h1 className="text-indigo-900 font-bold">
-                                معلومات الحساب
-                            </h1>
-                            <div className=" my-2 pb-3 flex justify-between gap-4">
-                                <div className="mt-4 w-1/2">
-                                    <InputLabel
-                                        htmlFor="email"
-                                        value="البريد الإلكتروني"
-                                    />
-
-                                    <TextInput
-                                        id="email"
-                                        type="email"
-                                        name="email"
-                                        value={data.email}
-                                        className="mt-1 block w-full"
-                                        autoComplete="username"
-                                        onChange={(e) =>
-                                            setData("email", e.target.value)
-                                        }
-                                        required
-                                    />
-
-                                    <InputError
-                                        message={errors.email}
-                                        className="mt-2"
-                                    />
-                                </div>
-
-                                <div className="mt-4 w-1/2">
-                                    <InputLabel
-                                        htmlFor="password"
-                                        value="كلمة المرور"
-                                    />
-
-                                    <TextInput
-                                        id="password"
-                                        type="password"
-                                        name="password"
-                                        value={data.password}
-                                        className="mt-1 block w-full"
-                                        autoComplete="new-password"
-                                        onChange={(e) =>
-                                            setData("password", e.target.value)
-                                        }
-                                        required
-                                    />
-
-                                    <InputError
-                                        message={errors.password}
-                                        className="mt-2"
-                                    />
-                                </div>
-                            </div>
-                            <h1 className=" font-bold my-3 text-indigo-900 ">
-                                معلومات إضافية
-                            </h1>
-                            <div className="grid grid-cols-6 gap-6">
-                                <div className="col-span-6 sm:col-span-3">
-                                    <label
-                                        htmlFor="name"
-                                        className="text-sm font-medium text-gray-900 block mb-2"
-                                    >
-                                        الاسم
-                                    </label>
-                                    <TextInput
-                                        type="text"
-                                        name="name"
-                                        value={data.name}
-                                        onChange={(e) =>
-                                            setData("name", e.target.value)
-                                        }
-                                        id="name"
-                                        className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2.5"
-                                        placeholder="محمد احمد"
-                                    />
-                                    <InputError
-                                        message={errors.name}
-                                        className="mt-2"
-                                    />
-                                </div>
-                                <div className="col-span-6 sm:col-span-3">
-                                    <label
-                                        htmlFor="department_id"
-                                        className="text-sm font-medium text-gray-900 block mb-2"
-                                    >
-                                        الوظيفة
-                                    </label>
-                                    <select
-                                        name="job_id"
-                                        onChange={(e) => {
-                                            setData("job_id", e.target.value);
-                                            checktypes(e.target.value);
-                                        }}
-                                        className="text-right shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2.5"
-                                        required=""
-                                    >
-                                        {jobs.map((el) => {
-                                            return (
-                                                <option
-                                                    key={el.id}
-                                                    value={el.job_id}
-                                                >
-                                                    {el.job_title}
-                                                </option>
-                                            );
-                                        })}
-                                    </select>
-                                    <InputError
-                                        message={errors.job_id}
-                                        className="mt-2"
-                                    />
-                                </div>
-                                <div className="col-span-6 sm:col-span-3">
-                                    <label
-                                        htmlFor="department_id"
-                                        className="text-sm font-medium text-gray-900 block mb-2"
-                                    >
-                                        القسم
-                                    </label>
-                                    <select
-                                        name="department_id"
-                                        id="department_id"
-                                        value={data.department_id}
-                                        onChange={(e) =>
-                                            setData(
-                                                "department_id",
-                                                e.target.value
-                                            )
-                                        }
-                                        className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2.5"
-                                        required=""
-                                    >
-                                        {departments.map((el) => {
-                                            return (
-                                                <option
-                                                    key={el.id}
-                                                    value={el.id}
-                                                >
-                                                    {el.title}
-                                                </option>
-                                            );
-                                        })}
-                                    </select>
-                                    <InputError
-                                        message={errors.department_id}
-                                        className="mt-2"
-                                    />
-                                </div>
-                                {/*  */}
-
-                                {/*  */}
-                                <div className="col-span-6 sm:col-span-3">
-                                    <label
-                                        htmlFor="speciality"
-                                        className="text-sm font-medium text-gray-900 block mb-2"
-                                    >
-                                        الإختصاص
-                                    </label>
-                                    <select
-                                        onChange={(e) =>
-                                            setData(
-                                                "specialty_id",
-                                                e.target.value
-                                            )
-                                        }
-                                        name="specialty_id"
-                                        value={data.specialty_id}
-                                        id="specialty_id"
-                                        className="text-right shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2.5"
-                                        required=""
-                                    >
-                                        {newSpecialities.map((speci) => {
-                                            return (
-                                                <option
-                                                    key={speci.id}
-                                                    value={speci.id}
-                                                >
-                                                    {speci.id} - {speci.title}
-                                                </option>
-                                            );
-                                        })}
-                                    </select>
-                                    <InputError
-                                        message={errors.specialty_id}
-                                        className="mt-2"
-                                    />
-                                </div>
-                                <div className="col-span-6 sm:col-span-3">
-                                    <label
-                                        htmlFor="license"
-                                        className="text-sm font-medium text-gray-900 block mb-2"
-                                    >
-                                        الشهادة
-                                    </label>
-                                    <TextInput
-                                        name="license"
-                                        id="license"
-                                        value={data.license}
-                                        onChange={(e) =>
-                                            setData("license", e.target.value)
-                                        }
-                                        className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2.5"
-                                        placeholder="جامعة دمشق"
-                                        required=""
-                                    />
-                                    <InputError
-                                        message={errors.license}
-                                        className="mt-2"
-                                    />
-                                </div>
-                                <div className="col-span-6 sm:col-span-3">
-                                    <label
-                                        htmlFor="contact"
-                                        className="text-sm font-medium text-gray-900 block mb-2"
-                                    >
-                                        معلومات الاتصال
-                                    </label>
-                                    <TextInput
-                                        name="contact"
-                                        id="contact"
-                                        value={data.contact}
-                                        onChange={(e) =>
-                                            setData("contact", e.target.value)
-                                        }
-                                        className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2.5"
-                                        placeholder="+963********"
-                                        required=""
-                                    />
-                                    <InputError
-                                        message={errors.contact}
-                                        className="mt-2"
-                                    />
-                                </div>
-                                <div className="col-span-6 sm:col-span-3">
-                                    <label
-                                        htmlFor="address"
-                                        className="text-sm font-medium text-gray-900 block mb-2"
-                                    >
-                                        العنوان
-                                    </label>
-                                    <TextInput
-                                        name="address"
-                                        id="address"
-                                        value={data.address}
-                                        onChange={(e) =>
-                                            setData("address", e.target.value)
-                                        }
-                                        className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2.5"
-                                        placeholder="مدينة طرطوس"
-                                        required=""
-                                    />
-                                    <InputError
-                                        message={errors.address}
-                                        className="mt-2"
-                                    />
-                                </div>
-                                <div className="col-span-6 sm:col-span-3">
-                                    <label
-                                        htmlFor="sal"
-                                        className="text-sm font-medium text-gray-900 block mb-2"
-                                    >
-                                        الراتب (بالدولار)
-                                    </label>
-                                    <TextInput
-                                        name="salary"
-                                        id="sal"
-                                        type="number"
-                                        value={data.salary}
-                                        onChange={(e) =>
-                                            setData("salary", e.target.value)
-                                        }
-                                        className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2.5"
-                                        placeholder="2000"
-                                        required=""
-                                    />
-                                    <InputError
-                                        message={errors.salary}
-                                        className="mt-2"
-                                    />
-                                </div>
-                                <div className="col-span-full">
-                                    <label
-                                        htmlFor="bio"
-                                        className="text-sm font-medium text-gray-900 block mb-2"
-                                    >
-                                        النبذة
-                                    </label>
-                                    <textarea
-                                        id="bio"
-                                        rows="6"
-                                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-indigo-600 focus:border-indigo-600 block w-full p-4"
-                                        placeholder="النبذة"
-                                        value={data.bio}
-                                        onChange={(e) =>
-                                            setData("bio", e.target.value)
-                                        }
-                                    ></textarea>
-                                </div>
-                                {/*  */}
-                                <div>
-                                    <InputLabel className="">
-                                        أرفق صورة
-                                    </InputLabel>
-                                    <div
-                                        className="w-[930px] cursor-pointer relative border-2 border-gray-300 border-dashed rounded-lg p-6 my-2"
-                                        id="dropzone"
-                                    >
-                                        <TextInput
-                                            type="file"
-                                            accept="image/*"
-                                            onChange={(e) => {
-                                                setData(
-                                                    "imgfile",
-                                                    e.target.files[0]
-                                                );
-                                                setNewImg(e.target.files[0]);
-                                            }}
-                                            className="absolute inset-0 w-full h-full opacity-0 z-50"
-                                        />
-                                        <div className="flex justify-center gap-4 items-center text-center w-full mx-auto ">
-                                            <div>
-                                                {" "}
-                                                <div className="w-full flex justify-center items-center">
-                                                    <LuImageUp
-                                                        size={"3.5rem"}
-                                                    />
-                                                </div>{" "}
-                                                <h3 className="mt-2 text-sm font-medium text-gray-900">
-                                                    <label
-                                                        htmlFor="file-upload"
-                                                        className="relative cursor-pointer"
-                                                    >
-                                                        <span>
-                                                            اسحب وأفلت هنا
-                                                        </span>
-                                                        <span className="text-indigo-600 cursor-pointer">
-                                                            {" "}
-                                                            أو تصفح الملفات
-                                                        </span>
-                                                        {newimg ? (
-                                                            <span>
-                                                                {" "}
-                                                                لتغيير الصورة{" "}
-                                                            </span>
-                                                        ) : (
-                                                            <span>
-                                                                {" "}
-                                                                لتحميل الصورة{" "}
-                                                            </span>
-                                                        )}
-                                                    </label>
-                                                </h3>{" "}
-                                                <p className="mt-1 text-xs text-gray-500">
-                                                    PNG, JPG, GIF up to 10MB
-                                                </p>{" "}
-                                            </div>
-
-                                            {newimg ? (
-                                                <img
-                                                    src={URL.createObjectURL(
-                                                        newimg
-                                                    )}
-                                                    className="object-cover w-40 h-40 rounded-lg "
-                                                    alt=""
+                        <form onSubmit={add_employee} className="space-y-6">
+                            <div className="flex flex-col lg:flex-row gap-6 items-start">
+                                <div className="lg:w-1/3">
+                                    <div className="sticky top-24 space-y-4">
+                                        <div className="bg-blue-50 rounded-2xl p-5 border-2 border-dashed border-gray-300 hover:border-primary/50 transition-all duration-300">
+                                            <InputLabel
+                                                value="صورة الموظف"
+                                                className="mb-3 text-gray-700"
+                                            />
+                                            <div className="relative text-center">
+                                                <input
+                                                    type="file"
+                                                    accept="image/*"
+                                                    onChange={(e) => {
+                                                        setData(
+                                                            "imgfile",
+                                                            e.target.files[0]
+                                                        );
+                                                        setNewImg(
+                                                            e.target.files[0]
+                                                        );
+                                                    }}
+                                                    className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                                                 />
-                                            ) : (
-                                                ""
-                                            )}
+
+                                                {newimg ? (
+                                                    <div className="relative group">
+                                                        <img
+                                                            src={URL.createObjectURL(
+                                                                newimg
+                                                            )}
+                                                            alt="preview"
+                                                            className="w-32 h-32 rounded-xl object-cover border-2 border-primary/30 mx-auto shadow-md"
+                                                        />
+                                                        <div className="absolute inset-0 bg-black/40 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                                            <LuImageUp
+                                                                size="2rem"
+                                                                className="text-white"
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                ) : (
+                                                    <div className="py-4">
+                                                        <LuImageUp
+                                                            size="3rem"
+                                                            className="mx-auto text-gray-400 mb-3"
+                                                        />
+                                                        <p className="text-sm text-gray-600 mb-1">
+                                                            انقر لرفع الصورة
+                                                        </p>
+                                                        <p className="text-xs text-gray-400">
+                                                            PNG, JPG حتى 10MB
+                                                        </p>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        </div>
+
+                                        <div className="bg-blue-50 rounded-2xl p-5 border border-gray-200">
+                                            <h4 className="text-sm font-semibold text-gray-800 mb-4 flex items-center">
+                                                <span className="w-1.5 h-4 bg-primary rounded-full ml-2"></span>
+                                                بيانات الدخول
+                                            </h4>
+                                            <div className="space-y-3">
+                                                <div>
+                                                    <InputLabel
+                                                        htmlFor="email"
+                                                        value="البريد الإلكتروني"
+                                                        className="text-xs"
+                                                    />
+                                                    <input
+                                                        id="email"
+                                                        type="email"
+                                                        value={data.email}
+                                                        onChange={(e) =>
+                                                            setData(
+                                                                "email",
+                                                                e.target.value
+                                                            )
+                                                        }
+                                                        required
+                                                        className="w-full h-10 px-3 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary focus:border-primary transition-all"
+                                                        placeholder="employee@company.com"
+                                                    />
+                                                    <InputError
+                                                        message={errors.email}
+                                                        className="mt-1 text-xs"
+                                                    />
+                                                </div>
+
+                                                <div>
+                                                    <InputLabel
+                                                        htmlFor="password"
+                                                        value="كلمة المرور"
+                                                        className="text-xs"
+                                                    />
+                                                    <input
+                                                        id="password"
+                                                        type="password"
+                                                        value={data.password}
+                                                        onChange={(e) =>
+                                                            setData(
+                                                                "password",
+                                                                e.target.value
+                                                            )
+                                                        }
+                                                        required
+                                                        className="w-full h-10 px-3 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary focus:border-primary transition-all"
+                                                        placeholder="••••••••"
+                                                    />
+                                                    <InputError
+                                                        message={
+                                                            errors.password
+                                                        }
+                                                        className="mt-1 text-xs"
+                                                    />
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                {/*  */}
+
+                                <div className="lg:w-2/3 space-y-6">
+                                    <div className="bg-blue-50 rounded-2xl p-5 border border-gray-200">
+                                        <h4 className="text-sm font-semibold text-gray-800 mb-4 flex items-center">
+                                            <span className="w-1.5 h-4 bg-primary rounded-full ml-2"></span>
+                                            المعلومات الأساسية
+                                        </h4>
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                            <div>
+                                                <InputLabel
+                                                    htmlFor="name"
+                                                    value="الاسم الكامل"
+                                                    className="text-xs"
+                                                />
+                                                <input
+                                                    id="name"
+                                                    type="text"
+                                                    value={data.name}
+                                                    onChange={(e) =>
+                                                        setData(
+                                                            "name",
+                                                            e.target.value
+                                                        )
+                                                    }
+                                                    placeholder="محمد أحمد"
+                                                    className="w-full h-10 px-3 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary focus:border-primary transition-all"
+                                                />
+                                                <InputError
+                                                    message={errors.name}
+                                                    className="mt-1 text-xs"
+                                                />
+                                            </div>
+
+                                            <div>
+                                                <InputLabel
+                                                    htmlFor="job_id"
+                                                    value="الوظيفة"
+                                                    className="text-xs"
+                                                />
+                                                <select
+                                                    id="job_id"
+                                                    value={data.job_id}
+                                                    onChange={(e) => {
+                                                        setData(
+                                                            "job_id",
+                                                            e.target.value
+                                                        );
+                                                        checktypes(
+                                                            e.target.value
+                                                        );
+                                                    }}
+                                                    className="w-full h-10 px-3 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary focus:border-primary transition-all"
+                                                >
+                                                    {jobs.map((el) => (
+                                                        <option
+                                                            key={el.id}
+                                                            value={el.job_id}
+                                                        >
+                                                            {el.job_title}
+                                                        </option>
+                                                    ))}
+                                                </select>
+                                                <InputError
+                                                    message={errors.job_id}
+                                                    className="mt-1 text-xs"
+                                                />
+                                            </div>
+
+                                            <div>
+                                                <InputLabel
+                                                    htmlFor="department_id"
+                                                    value="القسم"
+                                                    className="text-xs"
+                                                />
+                                                <select
+                                                    id="department_id"
+                                                    value={data.department_id}
+                                                    onChange={(e) =>
+                                                        setData(
+                                                            "department_id",
+                                                            e.target.value
+                                                        )
+                                                    }
+                                                    className="w-full h-10 px-3 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary focus:border-primary transition-all"
+                                                >
+                                                    {departments.map((el) => (
+                                                        <option
+                                                            key={el.id}
+                                                            value={el.id}
+                                                        >
+                                                            {el.title}
+                                                        </option>
+                                                    ))}
+                                                </select>
+                                                <InputError
+                                                    message={
+                                                        errors.department_id
+                                                    }
+                                                    className="mt-1 text-xs"
+                                                />
+                                            </div>
+
+                                            <div>
+                                                <InputLabel
+                                                    htmlFor="salary"
+                                                    value="الراتب ($)"
+                                                    className="text-xs"
+                                                />
+                                                <input
+                                                    id="salary"
+                                                    type="number"
+                                                    value={data.salary}
+                                                    onChange={(e) =>
+                                                        setData(
+                                                            "salary",
+                                                            e.target.value
+                                                        )
+                                                    }
+                                                    placeholder="2000"
+                                                    className="w-full h-10 px-3 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary focus:border-primary transition-all"
+                                                />
+                                                <InputError
+                                                    message={errors.salary}
+                                                    className="mt-1 text-xs"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="bg-blue-50 rounded-2xl p-5 border border-gray-200">
+                                        <h4 className="text-sm font-semibold text-gray-800 mb-4 flex items-center">
+                                            <span className="w-1.5 h-4 bg-primary rounded-full ml-2"></span>
+                                            معلومات إضافية
+                                        </h4>
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                            <div>
+                                                <InputLabel
+                                                    htmlFor="specialty_id"
+                                                    value="الإختصاص"
+                                                    className="text-xs"
+                                                />
+                                                <select
+                                                    id="specialty_id"
+                                                    value={data.specialty_id}
+                                                    onChange={(e) =>
+                                                        setData(
+                                                            "specialty_id",
+                                                            e.target.value
+                                                        )
+                                                    }
+                                                    className="w-full h-10 px-3 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary focus:border-primary transition-all"
+                                                >
+                                                    {newSpecialities.map(
+                                                        (speci) => (
+                                                            <option
+                                                                key={speci.id}
+                                                                value={speci.id}
+                                                            >
+                                                                {speci.title}
+                                                            </option>
+                                                        )
+                                                    )}
+                                                </select>
+                                                <InputError
+                                                    message={
+                                                        errors.specialty_id
+                                                    }
+                                                    className="mt-1 text-xs"
+                                                />
+                                            </div>
+
+                                            {/* الشهادة */}
+                                            <div>
+                                                <InputLabel
+                                                    htmlFor="license"
+                                                    value="الشهادة"
+                                                    className="text-xs"
+                                                />
+                                                <input
+                                                    id="license"
+                                                    type="text"
+                                                    value={data.license}
+                                                    onChange={(e) =>
+                                                        setData(
+                                                            "license",
+                                                            e.target.value
+                                                        )
+                                                    }
+                                                    placeholder="جامعة دمشق"
+                                                    className="w-full h-10 px-3 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary focus:border-primary transition-all"
+                                                />
+                                                <InputError
+                                                    message={errors.license}
+                                                    className="mt-1 text-xs"
+                                                />
+                                            </div>
+
+                                            {/* الاتصال */}
+                                            <div>
+                                                <InputLabel
+                                                    htmlFor="contact"
+                                                    value="معلومات الاتصال"
+                                                    className="text-xs"
+                                                />
+                                                <input
+                                                    id="contact"
+                                                    type="text"
+                                                    value={data.contact}
+                                                    onChange={(e) =>
+                                                        setData(
+                                                            "contact",
+                                                            e.target.value
+                                                        )
+                                                    }
+                                                    placeholder="+963********"
+                                                    className="w-full h-10 px-3 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary focus:border-primary transition-all"
+                                                />
+                                                <InputError
+                                                    message={errors.contact}
+                                                    className="mt-1 text-xs"
+                                                />
+                                            </div>
+
+                                            {/* العنوان */}
+                                            <div>
+                                                <InputLabel
+                                                    htmlFor="address"
+                                                    value="العنوان"
+                                                    className="text-xs"
+                                                />
+                                                <input
+                                                    id="address"
+                                                    type="text"
+                                                    value={data.address}
+                                                    onChange={(e) =>
+                                                        setData(
+                                                            "address",
+                                                            e.target.value
+                                                        )
+                                                    }
+                                                    placeholder="مدينة دمشق"
+                                                    className="w-full h-10 px-3 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary focus:border-primary transition-all"
+                                                />
+                                                <InputError
+                                                    message={errors.address}
+                                                    className="mt-1 text-xs"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* النبذة */}
+                                    <div className="bg-blue-50 rounded-2xl p-5 border border-gray-200">
+                                        <h4 className="text-sm font-semibold text-gray-800 mb-4 flex items-center">
+                                            <span className="w-1.5 h-4 bg-primary rounded-full ml-2"></span>
+                                            النبذة الشخصية
+                                        </h4>
+                                        <textarea
+                                            id="bio"
+                                            rows="3"
+                                            value={data.bio}
+                                            onChange={(e) =>
+                                                setData("bio", e.target.value)
+                                            }
+                                            placeholder="اكتب نبذة قصيرة عن الموظف، المهارات، والخبرات..."
+                                            className="w-full min-h-[80px] px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary focus:border-primary transition-all resize-vertical"
+                                        />
+                                        <InputError
+                                            message={errors.bio}
+                                            className="mt-1 text-xs"
+                                        />
+                                    </div>
+                                </div>
                             </div>
-                            <div className="pt-4 border-t border-gray-200 rounded-b">
+
+                            {/* زر الإرسال */}
+                            <div className="pt-6 border-t text-center">
                                 <button
-                                    className="block w-1/2 mx-auto text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-4 focus:ring-indigo-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                                     type="submit"
+                                    className="w-full sm:w-1/2 lg:w-1/3 mx-auto bg-primary text-white font-medium rounded-xl py-3 hover:bg-primary/90 focus:ring-4 focus:ring-primary/30 transition-all transform hover:scale-[1.02] shadow-md"
                                 >
-                                    أضف
+                                    إضافة الموظف
                                 </button>
-                            </div>{" "}
+                            </div>
                         </form>
                     )}
                 </div>

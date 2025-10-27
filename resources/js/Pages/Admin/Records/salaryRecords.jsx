@@ -3,83 +3,66 @@ import AdminLayout from "@/Layouts/AdminLayout";
 export default function SalaryRecords({ salary_records }) {
     return (
         <AdminLayout>
-            <div class="flex flex-col">
-                <div class=" overflow-x-auto pb-4">
-                    <div class="min-w-full inline-block align-middle">
-                        <div class="overflow-hidden  border rounded-lg border-gray-300 h-[85vh] overflow-y-auto">
-                            <table class="table-auto min-w-full rounded-xl">
-                                <thead className="sticky top-0">
-                                    <tr class="bg-gray-50">
-                                        <th
-                                            scope="col"
-                                            class="p-5 text-right whitespace-nowrap text-sm leading-6 font-semibold text-gray-900 capitalize"
-                                        >
-                                            {" "}
-                                            {" الموظف"}
-                                        </th>
-                                        <th
-                                            scope="col"
-                                            class="p-5 text-right whitespace-nowrap text-sm leading-6 font-semibold text-gray-900 capitalize"
-                                        >
-                                            {" الراتب المدفوع"}
-                                        </th>
-
-                                        <th
-                                            scope="col"
-                                            class="p-5 text-right whitespace-nowrap text-sm leading-6 font-semibold text-gray-900 capitalize"
-                                        >
-                                            {" "}
-                                            {"  تاريخ الدفع"}
-                                        </th>
+            <div className="flex flex-col">
+                <div className="overflow-x-auto pb-4">
+                    <div className="min-w-full inline-block align-middle">
+                        <div className="overflow-hidden border border-gray-200 rounded-2xl shadow-sm h-[85vh] overflow-y-auto bg-white">
+                            <table className="min-w-full table-auto rounded-xl">
+                                <thead className="sticky top-0 bg-gradient-to-r from-cyan-50 to-white shadow-sm">
+                                    <tr>
+                                        {[
+                                            "الموظف",
+                                            "الراتب المدفوع",
+                                            "تاريخ الدفع",
+                                        ].map((head) => (
+                                            <th
+                                                key={head}
+                                                scope="col"
+                                                className="p-4 text-right whitespace-nowrap text-sm font-semibold text-gray-700 border-b border-gray-200"
+                                            >
+                                                {head}
+                                            </th>
+                                        ))}
                                     </tr>
                                 </thead>
-                                <tbody class="divide-y divide-gray-300 ">
-                                    {salary_records.map((record) => {
-                                        return (
-                                            <tr
-                                                key={record.id}
-                                                class="bg-white transition-all duration-500 hover:bg-gray-50"
-                                            >
-                                                {/* موظف */}
-                                                <td class=" px-5 py-3">
-                                                    <div class="w-48 flex items-center gap-3">
-                                                        <img
-                                                            src={`/storage/${record.employee?.avatar}`}
-                                                            alt="emp image"
-                                                            className="w-10 h-10 rounded-full"
-                                                        />
-                                                        <div class="data">
-                                                            <p class="font-normal text-sm text-gray-900">
-                                                                {record.employee
-                                                                    ? record
-                                                                          .employee
-                                                                          .name
-                                                                    : "حساب محذوف"}
-                                                            </p>
-                                                            <p class="font-normal text-xs leading-5 text-gray-400">
-                                                                {" "}
-                                                                {record.employee
-                                                                    ? record
-                                                                          .employee
-                                                                          .user
-                                                                          .email
-                                                                    : ""}
-                                                            </p>
-                                                        </div>
+
+                                <tbody className="divide-y divide-gray-100">
+                                    {salary_records.map((record) => (
+                                        <tr
+                                            key={record.id}
+                                            className="bg-white hover:bg-cyan-50 transition-all duration-300"
+                                        >
+                                            <td className="px-5 py-3">
+                                                <div className="flex items-center gap-3 w-56">
+                                                    <img
+                                                        src={`/storage/${record.employee?.avatar}`}
+                                                        alt="emp image"
+                                                        className="w-10 h-10 rounded-full border border-gray-200"
+                                                    />
+                                                    <div>
+                                                        <p className="text-sm text-gray-800 font-medium">
+                                                            {record.employee
+                                                                ?.name ||
+                                                                "حساب محذوف"}
+                                                        </p>
+                                                        <p className="text-xs text-gray-400">
+                                                            {record.employee
+                                                                ?.user?.email ||
+                                                                ""}
+                                                        </p>
                                                     </div>
-                                                </td>
-                                                {/* مبلغ */}
-                                                <td class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900">
-                                                    {record.amount_paid}$
-                                                </td>
-                                                {/* تاريخ */}
-                                                <td class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900">
-                                                    {" "}
-                                                    {record.payment_date}
-                                                </td>
-                                            </tr>
-                                        );
-                                    })}
+                                                </div>
+                                            </td>
+
+                                            <td className="p-5 whitespace-nowrap text-sm font-semibold text-gray-700">
+                                                {record.amount_paid}$
+                                            </td>
+
+                                            <td className="p-5 whitespace-nowrap text-sm text-gray-700">
+                                                {record.payment_date}
+                                            </td>
+                                        </tr>
+                                    ))}
                                 </tbody>
                             </table>
                         </div>

@@ -50,6 +50,7 @@ Route::controller(AdminController::class)->middleware(['auth', 'rolemanager:admi
     Route::post('/store/specialty', 'store_specialty')->name("admin.store_specialty");
     Route::delete('/specialty/{specialty}/delete', 'delete_specialty')->name("admin.delete_specialty");
     Route::delete('/department/{department}/delete', 'delete_department')->name("admin.delete_department");
+    Route::get("/profile", 'view_my_profile')->name("admin.profile");
 
     Route::get('/complaints/view', [ComplaintController::class, 'view_complaints'])->name("admin.complaints");
     Route::delete('/complaints/{comp}/delete', [ComplaintController::class, 'delete_complaint'])->name("admin.complaint.delete");

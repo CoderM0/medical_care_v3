@@ -19,7 +19,7 @@ use App\Models\SafeRecord;
 use App\Models\SalaryRecords;
 use App\Models\Specialty;
 use App\Models\User;
-
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -263,5 +263,12 @@ class AdminController extends Controller
     public  function salary_records()
     {
         return Inertia::render('Admin/Records/salaryRecords', ['salary_records' => SalaryRecords::with(['employee', 'employee.user'])->get()]);
+    }
+    public function view_my_profile(Request $request)
+    {
+        return Inertia::render("Admin/AdminProfile", [
+            'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
+            'status' => session('status')
+        ]);
     }
 }
