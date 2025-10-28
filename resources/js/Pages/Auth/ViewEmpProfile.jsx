@@ -2,115 +2,241 @@ import { Link } from "@inertiajs/react";
 
 export default function ViewEmpProfile({ employee }) {
     return (
-        <div className="">
-            <div className="py-5 bg-indigo-800 px-5">
-                {/* <Link href={route("doctor.dashboard")} className="text-white">
-                    الصفحة الرئيسية
-                </Link> */}
-                <button className="text-white" onClick={() => history.back()}>
-                    رجوع
-                </button>
-            </div>
-            <div className="  my-5 ">
-                <div className=" bg-white dark:bg-gray-800 rounded-xl shadow-2xl w-full p-8 transition-all duration-300 animate-fade-in">
-                    <div className="flex flex-col md:flex-row ">
-                        <div className="md:w-1/3 text-center mb-8 md:mb-0">
-                            <img
-                                src={`/storage/${employee.avatar}`}
-                                alt="Profile Picture"
-                                className="rounded-full w-48 h-48 mx-auto mb-4 border-4 border-indigo-800 dark:border-blue-900 transition-transform duration-300 hover:scale-105"
-                            />
-                            <h1 className="text-2xl font-bold text-indigo-800 dark:text-white mb-2">
-                                {employee.name}
-                            </h1>
-                            <p className="text-gray-600 dark:text-gray-300">
-                                {employee.specialty.title}
-                            </p>
-                            <div className="flex justify-between w-10/12 mx-auto">
-                                <Link
-                                    href={route("profile.edit")}
-                                    className="mt-4 bg-indigo-800 text-white px-4 py-2 rounded-lg hover:bg-blue-900 transition-colors duration-300"
-                                >
-                                    تعديل معلومات الحساب
-                                </Link>
-                                <Link
-                                    href={route("employee.profile.edit")}
-                                    className="mt-4 bg-indigo-800 text-white px-4 py-2 rounded-lg hover:bg-blue-900 transition-colors duration-300"
-                                >
-                                    تعديل المعلومات الشخصية
-                                </Link>
+        <div className="min-h-screen bg-gradient-to-br from-blue-50 to-gray-100 font-tajawal">
+            <div className=" mx-auto p-2">
+                <div className="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden">
+                    <div className="p-8">
+                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                            <div className="lg:col-span-1">
+                                <div className="text-center">
+                                    <img
+                                        src={`/storage/${employee.avatar}`}
+                                        alt="Profile Picture"
+                                        className="rounded-2xl w-48 h-48 mx-auto mb-6 border-4 border-blue-200 shadow-lg"
+                                    />
+                                    <h1 className="text-2xl font-bold text-gray-800 mb-2">
+                                        {employee.name}
+                                    </h1>
+                                    <p className="text-blue-600 font-semibold bg-blue-50 px-4 py-2 rounded-full inline-block">
+                                        {employee.specialty.title}
+                                    </p>
+
+                                    <div className="mt-6 space-y-3">
+                                        <Link
+                                            href={route("profile.edit")}
+                                            className="block w-full bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 shadow-md hover:shadow-lg"
+                                        >
+                                            تعديل معلومات الحساب
+                                        </Link>
+                                        <Link
+                                            href={route(
+                                                "employee.profile.edit"
+                                            )}
+                                            className="block w-full bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 shadow-md hover:shadow-lg"
+                                        >
+                                            تعديل المعلومات الشخصية
+                                        </Link>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div className="md:w-2/3 md:pl-8">
-                            <h2 className="text-xl font-semibold text-indigo-800 dark:text-white mb-4">
-                                حول
-                            </h2>
-                            <p className="text-gray-700 dark:text-gray-300 mb-6">
-                                {employee.bio}
-                            </p>
-                            <h2 className="text-xl font-semibold text-indigo-800 dark:text-white mb-4">
-                                معلومات إضافية
-                            </h2>
-                            <div className="flex flex-wrap gap-2 mb-6">
-                                <h1>
-                                    <span className="text-indigo-800 font-bold">
-                                        {" "}
-                                        قسم{" "}
-                                    </span>
-                                    {employee.department.title}
-                                </h1>
-                                <h1>
-                                    |{" "}
-                                    <span className="text-indigo-800 font-bold">
-                                        {" "}
-                                        الشهادة{" "}
-                                    </span>
-                                    {employee.license}
-                                </h1>
+
+                            <div className="lg:col-span-2 space-y-8">
+                                <div className="bg-gray-50 rounded-2xl p-6 border border-gray-200">
+                                    <h2 className="text-xl font-semibold text-gray-800 mb-4 flex items-center gap-3">
+                                        <svg
+                                            className="w-6 h-6 text-blue-600"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth={2}
+                                                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                                            />
+                                        </svg>
+                                        النبذة الشخصية
+                                    </h2>
+                                    <p className="text-gray-600 leading-relaxed">
+                                        {employee.bio ||
+                                            "لم يتم إضافة نبذة شخصية بعد"}
+                                    </p>
+                                </div>
+
+                                <div className="bg-gray-50 rounded-2xl p-6 border border-gray-200">
+                                    <h2 className="text-xl font-semibold text-gray-800 mb-4 flex items-center gap-3">
+                                        <svg
+                                            className="w-6 h-6 text-green-600"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth={2}
+                                                d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H8a2 2 0 01-2-2V8a2 2 0 012-2V6"
+                                            />
+                                        </svg>
+                                        المعلومات المهنية
+                                    </h2>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div className="flex items-center gap-3 bg-white rounded-xl p-4 border border-gray-200">
+                                            <div className="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center">
+                                                <svg
+                                                    className="w-5 h-5 text-blue-600"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    viewBox="0 0 24 24"
+                                                >
+                                                    <path
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        strokeWidth={2}
+                                                        d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+                                                    />
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <p className="text-sm text-gray-600">
+                                                    القسم
+                                                </p>
+                                                <p className="font-semibold text-gray-800">
+                                                    {employee.department.title}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div className="flex items-center gap-3 bg-white rounded-xl p-4 border border-gray-200">
+                                            <div className="w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center">
+                                                <svg
+                                                    className="w-5 h-5 text-green-600"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    viewBox="0 0 24 24"
+                                                >
+                                                    <path
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        strokeWidth={2}
+                                                        d="M12 14l9-5-9-5-9 5 9 5z"
+                                                    />
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <p className="text-sm text-gray-600">
+                                                    الشهادة
+                                                </p>
+                                                <p className="font-semibold text-gray-800">
+                                                    {employee.license}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="bg-gray-50 rounded-2xl p-6 border border-gray-200">
+                                    <h2 className="text-xl font-semibold text-gray-800 mb-4 flex items-center gap-3">
+                                        <svg
+                                            className="w-6 h-6 text-purple-600"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth={2}
+                                                d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                                            />
+                                        </svg>
+                                        معلومات الاتصال
+                                    </h2>
+                                    <div className="space-y-4">
+                                        <div className="flex items-center gap-4 bg-white rounded-xl p-4 border border-gray-200">
+                                            <div className="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center">
+                                                <svg
+                                                    className="w-5 h-5 text-purple-600"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    viewBox="0 0 24 24"
+                                                >
+                                                    <path
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        strokeWidth={2}
+                                                        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                                                    />
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <p className="text-sm text-gray-600">
+                                                    البريد الإلكتروني
+                                                </p>
+                                                <p className="font-semibold text-gray-800">
+                                                    {employee.user.email}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div className="flex items-center gap-4 bg-white rounded-xl p-4 border border-gray-200">
+                                            <div className="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center">
+                                                <svg
+                                                    className="w-5 h-5 text-blue-600"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    viewBox="0 0 24 24"
+                                                >
+                                                    <path
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        strokeWidth={2}
+                                                        d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                                                    />
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <p className="text-sm text-gray-600">
+                                                    رقم الهاتف
+                                                </p>
+                                                <p className="font-semibold text-gray-800">
+                                                    {employee.contact}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div className="flex items-center gap-4 bg-white rounded-xl p-4 border border-gray-200">
+                                            <div className="w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center">
+                                                <svg
+                                                    className="w-5 h-5 text-green-600"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    viewBox="0 0 24 24"
+                                                >
+                                                    <path
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        strokeWidth={2}
+                                                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                                                    />
+                                                    <path
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        strokeWidth={2}
+                                                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                                                    />
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <p className="text-sm text-gray-600">
+                                                    العنوان
+                                                </p>
+                                                <p className="font-semibold text-gray-800">
+                                                    {employee.address}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <h2 className="text-xl font-semibold text-indigo-800 dark:text-white mb-4">
-                                معلومات الاتصال
-                            </h2>
-                            <ul className="space-y-2 text-gray-700 dark:text-gray-300">
-                                <li className="flex items-center">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        className="h-5 w-5 mr-2 text-indigo-800 dark:text-blue-900"
-                                        viewBox="0 0 20 20"
-                                        fill="currentColor"
-                                    >
-                                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-                                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
-                                    </svg>
-                                    {employee.user.email}
-                                </li>
-                                <li className="flex items-center">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        className="h-5 w-5 mr-2 text-indigo-800 dark:text-blue-900"
-                                        viewBox="0 0 20 20"
-                                        fill="currentColor"
-                                    >
-                                        <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
-                                    </svg>
-                                    {employee.contact}
-                                </li>
-                                <li className="flex items-center">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        className="h-5 w-5 mr-2 text-indigo-800 dark:text-blue-900"
-                                        viewBox="0 0 20 20"
-                                        fill="currentColor"
-                                    >
-                                        <path
-                                            fill-rule="evenodd"
-                                            d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-                                            clip-rule="evenodd"
-                                        />
-                                    </svg>
-                                    {employee.address}
-                                </li>
-                            </ul>
                         </div>
                     </div>
                 </div>

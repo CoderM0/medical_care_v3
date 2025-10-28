@@ -64,15 +64,6 @@ Route::controller(AdminController::class)->middleware(['auth', 'rolemanager:admi
     Route::get('/inventory', 'view_inventory')->name('admin.inventory.index');
     Route::get('/records/safe', 'safe_records')->name('admin.safe.index');
     Route::get('/records/salary', 'salary_records')->name('admin.salary.index');
-    // Route::controller(InventoryManagementController::class)->prefix("inventory")->group(function(){
-    //     Route::get("/add",'add')->name("admin.add_to_inventory");
-    //     Route::post("/store",'store_item')->name("admin.inventory.store");
-    //     Route::get("/manage",'manage_inventory')->name("admin.inventory.manage");
-    //     Route::get("/manage/{id}/edit",'edit_item')->name("admin.inventory.edit");
-    //     Route::put("/manage/{id}/update",'update_item')->name("admin.inventory.update");
-    //     Route::delete("/manage/{id}/delete",'delete_item')->name("admin.inventory.delete");
-    // });
-
 });
 Route::middleware(['auth', 'rolemanager:doctor'])->prefix("doctor")->group(function () {
     Route::controller(DoctorController::class)->group(function () {
@@ -87,6 +78,7 @@ Route::middleware(['auth', 'rolemanager:doctor'])->prefix("doctor")->group(funct
         Route::get('/appointment/ended', 'ended_appointment')->name("doctor.ended_appointments");
         Route::put('/appointment/{appointment}/end', 'end_appointment')->name("doctor.end_appointment");
         Route::delete('/appointment/{appointment}/delete', 'delete_appointment')->name("doctor.ended_appointment.delete");
+        Route::get("/profile/view", "view_profile")->name("doctor.view_profile");
     });
     Route::controller(BusinessHourController::class)->prefix('/businesshours')->group(function () {
         Route::post('/update', 'update_table')->name('doctor.businesstable.update');

@@ -10,10 +10,11 @@ export default function BlackNav({
         <Link
             {...props}
             className={
-                "inline-flex items-center  px-1   font-medium leading-5  transition duration-150 ease-in-out focus:outline-none " +
+                "flex items-center w-full transition-all duration-300 ease-in-out focus:outline-none " +
                 (active
-                    ? " text-white border-b border-b-white pr-2  px-2 font-bold"
-                    : "border-transparent text-gray-300 hover:border-gray-300 hover:text-white focus:border-gray-300 focus:text-white ") +
+                    ? "text-blue-600 bg-blue-50 border-r-2 border-blue-500 font-semibold"
+                    : "text-gray-600 hover:text-blue-600 hover:bg-blue-50 hover:border-r-2 hover:border-blue-300") +
+                " " +
                 className
             }
         >

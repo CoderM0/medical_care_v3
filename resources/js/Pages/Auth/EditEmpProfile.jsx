@@ -1,9 +1,22 @@
 import InputError from "@/Components/InputError";
-import Loader from "@/Components/Loader";
 import TextInput from "@/Components/TextInput";
 import { useForm } from "@inertiajs/react";
 import { useState } from "react";
-import { BiSolidCameraPlus } from "react-icons/bi";
+import {
+    FaCheckCircle,
+    FaFileAlt,
+    FaMapMarkerAlt,
+    FaSave,
+    FaTimes,
+    FaUserEdit,
+} from "react-icons/fa";
+import {
+    FaArrowRight,
+    FaCamera,
+    FaGraduationCap,
+    FaPhone,
+    FaUser,
+} from "react-icons/fa6";
 
 export default function EditEmpProfile({ employee, departments }) {
     const [succ, setSucc] = useState(false);
@@ -30,51 +43,34 @@ export default function EditEmpProfile({ employee, departments }) {
         });
     };
     return (
-        <div className="bg-white  border-4 rounded-lg shadow relative  ">
-            <div className="py-5 bg-indigo-800 px-5">
-                <button className="text-white" onClick={() => history.back()}>
-                    رجوع
-                </button>
-            </div>
-            <div className="flex items-start justify-between p-5 border-b rounded-t bg-white z-20">
-                <h3 className="text-xl font-semibold ">
-                    تعديل معلوماتك الشخصية
-                </h3>{" "}
-                <p
-                    className={`text-center text-xl text-green-500 duration-150 transition-opacity  ${
-                        succ ? "opacity-100" : "opacity-0"
-                    }`}
-                >
-                    تم التحديث بنجاح
-                </p>
-            </div>
+        <div className="bg-white font-tajawal rounded-2xl shadow-lg border border-blue-100 overflow-hidden">
             {processing ? (
-                <Loader />
+                <div className="flex justify-center items-center py-20">
+                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+                </div>
             ) : (
-                <div className="p-6 space-y-6">
-                    <form onSubmit={update_employee}>
-                        <div className="grid grid-cols-6 gap-6">
-                            <div className="col-span-6 flex justify-center">
-                                <span class="relative inline-block">
+                <div className="flex flex-col lg:flex-row">
+                    <div className="lg:w-1/3 bg-gradient-to-b from-blue-50 to-white p-8 border-b lg:border-b-0 lg:border-r border-blue-100">
+                        <div className="flex flex-col items-center text-center">
+                            <div className="relative mb-6">
+                                <div className="relative group">
                                     <img
                                         src={
                                             newImg
                                                 ? URL.createObjectURL(newImg)
                                                 : `/storage/${employee.avatar}`
                                         }
-                                        className="object-cover w-40 h-40 rounded-full "
+                                        className="w-48 h-48 rounded-full object-cover border-4 border-white shadow-lg group-hover:border-blue-200 transition-all duration-300"
                                     />
                                     <label
                                         htmlFor="newimgfile"
-                                        className="cursor-pointer absolute bottom-0 right-0 w-10 h-10 bg-white border-2 border-gray-200 rounded-full flex justify-center items-center"
+                                        className="absolute bottom-4 right-4 w-12 h-12 bg-blue-600 border-2 border-white rounded-full flex justify-center items-center cursor-pointer shadow-lg hover:bg-blue-700 transition-all duration-200 transform hover:scale-110"
                                     >
-                                        <BiSolidCameraPlus
-                                            color="green"
-                                            size={"1.5rem"}
-                                        />
+                                        <FaCamera className="text-white w-5 h-5" />
                                     </label>
-                                </span>
+                                </div>
                             </div>
+
                             <TextInput
                                 type="file"
                                 onChange={(e) => {
@@ -84,194 +80,237 @@ export default function EditEmpProfile({ employee, departments }) {
                                 id="newimgfile"
                                 className="hidden"
                             />
-                            <div className="col-span-6 sm:col-span-3">
-                                <label
-                                    htmlFor="name"
-                                    className="text-sm font-medium text-gray-900 block mb-2"
-                                >
-                                    الاسم
-                                </label>
-                                <TextInput
-                                    type="text"
-                                    name="name"
-                                    value={data.name}
-                                    onChange={(e) =>
-                                        setData("name", e.target.value)
-                                    }
-                                    id="name"
-                                    className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
-                                    placeholder="احمد محمد"
-                                />
-                                <InputError
-                                    message={errors.name}
-                                    className="mt-2"
-                                />
+
+                            <h2 className="text-2xl font-bold text-gray-800 mb-2">
+                                {data.name || "الاسم الكامل"}
+                            </h2>
+                            <p className="text-blue-600 mb-4 flex items-center gap-2">
+                                <FaGraduationCap className="w-4 h-4" />
+                                {data.license || "الشهادة العلمية"}
+                            </p>
+
+                            <div className="w-full space-y-3 mt-6">
+                                <div className="flex items-center gap-3 p-3 bg-white rounded-lg border border-blue-100">
+                                    <div className="p-2 bg-blue-100 rounded-lg">
+                                        <FaPhone className="w-4 h-4 text-blue-600" />
+                                    </div>
+                                    <div className="text-right flex-1">
+                                        <p className="text-sm text-gray-500">
+                                            الاتصال
+                                        </p>
+                                        <p className="text-gray-800 font-medium">
+                                            {data.contact || "رقم الهاتف"}
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div className="flex items-center gap-3 p-3 bg-white rounded-lg border border-blue-100">
+                                    <div className="p-2 bg-blue-100 rounded-lg">
+                                        <FaMapMarkerAlt className="w-4 h-4 text-blue-600" />
+                                    </div>
+                                    <div className="text-right flex-1">
+                                        <p className="text-sm text-gray-500">
+                                            العنوان
+                                        </p>
+                                        <p className="text-gray-800 font-medium">
+                                            {data.address || "العنوان"}
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
 
-                            {/* <div className="col-span-6 sm:col-span-3">
-                                <label
-                                    htmlFor="department_id"
-                                    className="text-sm font-medium text-gray-900 block mb-2"
-                                >
-                                    القسم
-                                </label>
-                                <select
-                                    name="department_id"
-                                    id="department_id"
-                                    value={data.department_id}
-                                    onChange={(e) =>
-                                        setData("department_id", e.target.value)
-                                    }
-                                    className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
-                                    required=""
-                                >
-                                    {departments.map((el) => {
-                                        return (
-                                            <option
-                                                key={el.id}
-                                                value={el.id}
-                                                selected={
-                                                    el.id == data.department_id
-                                                }
-                                            >
-                                                {el.title}
-                                            </option>
-                                        );
-                                    })}
-                                </select>
-                                <InputError
-                                    message={errors.department_id}
-                                    className="mt-2"
-                                />
-                            </div> */}
-                            {/*  */}
-
-                            {/*  */}
-
-                            <div className="col-span-6 sm:col-span-3">
-                                <label
-                                    htmlFor="license"
-                                    className="text-sm font-medium text-gray-900 block mb-2"
-                                >
-                                    الشهادة
-                                </label>
-                                <TextInput
-                                    name="license"
-                                    id="license"
-                                    value={data.license}
-                                    onChange={(e) =>
-                                        setData("license", e.target.value)
-                                    }
-                                    className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
-                                    placeholder="جامعة طرطوس"
-                                    required=""
-                                />
-                                <InputError
-                                    message={errors.license}
-                                    className="mt-2"
-                                />
-                            </div>
-                            <div className="col-span-6 sm:col-span-3">
-                                <label
-                                    htmlFor="contact"
-                                    className="text-sm font-medium text-gray-900 block mb-2"
-                                >
-                                    معلومات الاتصال
-                                </label>
-                                <TextInput
-                                    name="contact"
-                                    id="contact"
-                                    value={data.contact}
-                                    onChange={(e) =>
-                                        setData("contact", e.target.value)
-                                    }
-                                    className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
-                                    placeholder="+963********"
-                                    required=""
-                                />
-                                <InputError
-                                    message={errors.contact}
-                                    className="mt-2"
-                                />
-                            </div>
-                            <div className="col-span-6 sm:col-span-3">
-                                <label
-                                    htmlFor="address"
-                                    className="text-sm font-medium text-gray-900 block mb-2"
-                                >
-                                    العنوان
-                                </label>
-                                <TextInput
-                                    name="address"
-                                    id="address"
-                                    value={data.address}
-                                    onChange={(e) =>
-                                        setData("address", e.target.value)
-                                    }
-                                    className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
-                                    placeholder="مدينة طرطوس"
-                                    required=""
-                                />
-                                <InputError
-                                    message={errors.address}
-                                    className="mt-2"
-                                />
-                            </div>
-                            {/* <div className="col-span-6 sm:col-span-3">
-                                <label
-                                    htmlFor="salary"
-                                    className="text-sm font-medium text-gray-900 block mb-2"
-                                >
-                                    الراتب
-                                </label>
-                                <TextInput
-                                    name="salary"
-                                    id="salary"
-                                    value={data.salary}
-                                    onChange={(e) =>
-                                        setData("salary", e.target.value)
-                                    }
-                                    className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
-                                    placeholder="الراتب بالدولار "
-                                    required=""
-                                />
-                                <InputError
-                                    message={errors.salary}
-                                    className="mt-2"
-                                />
-                            </div> */}
-
-                            <div className="col-span-full">
-                                <label
-                                    htmlFor="bio"
-                                    className="text-sm font-medium text-gray-900 block mb-2"
-                                >
-                                    النبذة
-                                </label>
-                                <textarea
-                                    id="bio"
-                                    rows="6"
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-4"
-                                    placeholder="النبذة"
-                                    value={data.bio}
-                                    onChange={(e) =>
-                                        setData("bio", e.target.value)
-                                    }
-                                ></textarea>
-                            </div>
-                            {/*  */}
-
-                            {/*  */}
-                        </div>
-                        <div className="pt-4 border-t border-gray-200 rounded-b">
-                            <button
-                                className="block w-1/2 mx-auto text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-                                type="submit"
+                            <div
+                                className={`mt-6 flex items-center gap-2 p-3 rounded-lg bg-green-50 border border-green-200 transition-all duration-300 ${
+                                    succ ? "opacity-100" : "opacity-0"
+                                }`}
                             >
-                                تحديث
+                                <FaCheckCircle className="w-5 h-5 text-green-600" />
+                                <span className="text-green-700 font-medium">
+                                    تم التحديث بنجاح
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="lg:w-2/3 p-8">
+                        <div className="flex items-center justify-between mb-8">
+                            <div className="flex items-center gap-3">
+                                <div className="p-3 bg-blue-100 rounded-xl">
+                                    <FaUserEdit className="w-6 h-6 text-blue-600" />
+                                </div>
+                                <div>
+                                    <h1 className="text-2xl font-bold text-gray-800">
+                                        تعديل الملف الشخصي
+                                    </h1>
+                                    <p className="text-gray-600">
+                                        قم بتحديث معلوماتك الشخصية والمهنية
+                                    </p>
+                                </div>
+                            </div>
+
+                            <button
+                                onClick={() => history.back()}
+                                className="flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors duration-200 p-3 hover:bg-blue-50 rounded-lg"
+                            >
+                                <FaArrowRight className="w-4 h-4" />
+                                <span>رجوع</span>
                             </button>
-                        </div>{" "}
-                    </form>
+                        </div>
+
+                        <form onSubmit={update_employee}>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div className="space-y-6">
+                                    <div className="space-y-2">
+                                        <label
+                                            htmlFor="name"
+                                            className=" text-sm font-semibold text-gray-700 flex items-center gap-2"
+                                        >
+                                            <FaUser className="w-4 h-4 text-blue-500" />
+                                            الاسم الكامل
+                                        </label>
+                                        <TextInput
+                                            type="text"
+                                            name="name"
+                                            value={data.name}
+                                            onChange={(e) =>
+                                                setData("name", e.target.value)
+                                            }
+                                            id="name"
+                                            className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                                            placeholder="أدخل الاسم الكامل"
+                                        />
+                                        <InputError
+                                            message={errors.name}
+                                            className="mt-1"
+                                        />
+                                    </div>
+
+                                    <div className="space-y-2">
+                                        <label
+                                            htmlFor="license"
+                                            className="  text-sm font-semibold text-gray-700 flex items-center gap-2"
+                                        >
+                                            <FaGraduationCap className="w-4 h-4 text-blue-500" />
+                                            الشهادة العلمية
+                                        </label>
+                                        <TextInput
+                                            name="license"
+                                            id="license"
+                                            value={data.license}
+                                            onChange={(e) =>
+                                                setData(
+                                                    "license",
+                                                    e.target.value
+                                                )
+                                            }
+                                            className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                                            placeholder="المؤهل العلمي"
+                                        />
+                                        <InputError
+                                            message={errors.license}
+                                            className="mt-1"
+                                        />
+                                    </div>
+
+                                    <div className="space-y-2">
+                                        <label
+                                            htmlFor="contact"
+                                            className="  text-sm font-semibold text-gray-700 flex items-center gap-2"
+                                        >
+                                            <FaPhone className="w-4 h-4 text-blue-500" />
+                                            معلومات الاتصال
+                                        </label>
+                                        <TextInput
+                                            name="contact"
+                                            id="contact"
+                                            value={data.contact}
+                                            onChange={(e) =>
+                                                setData(
+                                                    "contact",
+                                                    e.target.value
+                                                )
+                                            }
+                                            className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                                            placeholder="رقم الهاتف"
+                                        />
+                                        <InputError
+                                            message={errors.contact}
+                                            className="mt-1"
+                                        />
+                                    </div>
+                                </div>
+
+                                <div className="space-y-6">
+                                    <div className="space-y-2">
+                                        <label
+                                            htmlFor="address"
+                                            className="  text-sm font-semibold text-gray-700 flex items-center gap-2"
+                                        >
+                                            <FaMapMarkerAlt className="w-4 h-4 text-blue-500" />
+                                            العنوان
+                                        </label>
+                                        <TextInput
+                                            name="address"
+                                            id="address"
+                                            value={data.address}
+                                            onChange={(e) =>
+                                                setData(
+                                                    "address",
+                                                    e.target.value
+                                                )
+                                            }
+                                            className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                                            placeholder="العنوان التفصيلي"
+                                        />
+                                        <InputError
+                                            message={errors.address}
+                                            className="mt-1"
+                                        />
+                                    </div>
+
+                                    <div className="space-y-2">
+                                        <label
+                                            htmlFor="bio"
+                                            className="  text-sm font-semibold text-gray-700 flex items-center gap-2"
+                                        >
+                                            <FaFileAlt className="w-4 h-4 text-blue-500" />
+                                            النبذة الشخصية
+                                        </label>
+                                        <textarea
+                                            id="bio"
+                                            rows="4"
+                                            className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none"
+                                            placeholder="اكتب نبذة مختصرة عن خبراتك وتخصصك..."
+                                            value={data.bio}
+                                            onChange={(e) =>
+                                                setData("bio", e.target.value)
+                                            }
+                                        ></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="mt-8 pt-6 border-t border-blue-50">
+                                <div className="flex gap-4">
+                                    <button
+                                        type="button"
+                                        onClick={() => history.back()}
+                                        className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-3 px-6 rounded-xl transition-all duration-200 flex items-center justify-center gap-2"
+                                    >
+                                        <FaTimes className="w-4 h-4" />
+                                        إلغاء
+                                    </button>
+                                    <button
+                                        type="submit"
+                                        className="flex-1 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center justify-center gap-2"
+                                    >
+                                        <FaSave className="w-4 h-4" />
+                                        حفظ التعديلات
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             )}
         </div>

@@ -4,8 +4,22 @@ import TextInput from "@/Components/TextInput";
 import GuestLayout from "@/Layouts/GuestLayout";
 import { Link, useForm } from "@inertiajs/react";
 import { useState } from "react";
-import { FaHandHoldingHeart, FaUpload } from "react-icons/fa6";
-
+import { FaCalendarAlt, FaShieldAlt, FaTint, FaUserMd } from "react-icons/fa";
+import {
+    FaEnvelope,
+    FaHandHoldingHeart,
+    FaHandHoldingMedical,
+    FaHeart,
+    FaLock,
+    FaNotesMedical,
+    FaRegBell,
+    FaSpinner,
+    FaStethoscope,
+    FaUpload,
+    FaUser,
+    FaUserPlus,
+    FaVenusMars,
+} from "react-icons/fa6";
 export default function Register() {
     const [newImg, setNwImg] = useState(null);
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -31,391 +45,472 @@ export default function Register() {
 
     return (
         <GuestLayout>
-            <div className="flex flex-col md:flex-row min-h-screen">
-                <div className="bg-blue-900 text-white p-8 md:p-12 md:w-1/2 relative overflow-hidden">
-                    <div className="z-10 relative">
-                        <Link href="/">
-                            <ApplicationLogo className="h-20 w-20 fill-current text-white" />
-                        </Link>
+            <div className="min-h-screen bg-gradient-to-br font-tajawal from-blue-50 to-white flex items-center justify-center p-4">
+                <div className="w-full  bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col md:flex-row">
+                    <div className="bg-gradient-to-br from-blue-800 to-blue-600 text-white p-6 md:p-8 md:w-2/5 relative overflow-hidden">
+                        <div className="z-10 relative">
+                            <Link href="/" className="inline-block">
+                                <ApplicationLogo className="h-12 w-12 fill-current text-white hover:scale-110 transition-transform duration-300" />
+                            </Link>
 
-                        <div className="mt-20 md:mt-32">
-                            <h1 className="text-4xl md:text-5xl font-bold mb-4">
-                                انشئ حساب جديد
-                            </h1>
-                            <h2 className="text-2xl md:text-3xl font-semibold mb-6 flex gap-2 items-center">
-                                Med Care <FaHandHoldingHeart />
-                            </h2>
-                            <p className="max-w-md opacity-90">
-                                Lorem Ipsum is simply dummy text of the printing
-                                and typesetting industry. Lorem Ipsum has been
-                                the industry's standard dummy text ever since
-                                the 1500s.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div className="absolute left-0 top-1/3 transform translate-x-1/4">
-                        <div className="relative w-64 h-64">
-                            <svg
-                                className="text-white/20 absolute top-10 left-10 w-16 h-16"
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokelinejoin="round"
-                                viewBox="0 0 24 24"
-                            >
-                                <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z" />
-                            </svg>
-
-                            <svg
-                                className="text-white/20 absolute bottom-10 right-10 w-20 h-20"
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokelinejoin="round"
-                                viewBox="0 0 24 24"
-                            >
-                                <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z" />
-                            </svg>
-
-                            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                                <div className="relative w-40 h-40">
-                                    <svg
-                                        className="text-orange-400 w-40 h-40 transform rotate-45"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        strokeWidth="2"
-                                        strokeLinecap="round"
-                                        strokelinejoin="round"
-                                        viewBox="0 0 24 24"
-                                    >
-                                        <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" />
-                                        <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" />
-                                        <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" />
-                                        <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <svg
-                        className="text-white/20 absolute bottom-10 left-10 w-24 h-24"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokelinejoin="round"
-                        viewBox="0 0 24 24"
-                    >
-                        <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z" />
-                    </svg>
-                </div>
-
-                {/* <!-- Right Section --> */}
-                <div className="p-8 md:p-12 md:w-1/2 flex items-center justify-center">
-                    <div className="w-full bg-white rounded-3xl shadow-lg p-8">
-                        <div className="flex justify-between">
-                            <div className="w-1/2">
-                                <div className="text-right mb-4">
-                                    <span className="text-gray-500">
-                                        لديك حساب ؟
+                            <div className="mt-8 md:mt-12">
+                                <h1 className="text-2xl md:text-3xl font-bold mb-3 leading-tight">
+                                    انضم إلى عائلتنا الطبية
+                                </h1>
+                                <h2 className="text-xl md:text-2xl font-semibold mb-4 flex gap-2 items-center">
+                                    <span className="bg-white/20 px-3 py-1 rounded-full">
+                                        Med Care
                                     </span>
-                                    <Link
-                                        href={route("login")}
-                                        className="text-blue-500 font-medium"
-                                    >
-                                        سجل دخول
-                                    </Link>
-                                </div>
-
-                                <div className="mb-8">
-                                    <p className="text-gray-600 mb-1">
-                                        Welcome to{" "}
-                                        <span className="text-blue-500 font-bold flex items-center gap-2">
-                                            Med Care <FaHandHoldingHeart />
-                                        </span>
-                                    </p>
-                                    <h1 className="text-4xl font-bold">
-                                        انشئ حساب
-                                    </h1>
-                                </div>
+                                    <FaHandHoldingHeart className="text-blue-200" />
+                                </h2>
+                                <p className="max-w-md opacity-90 leading-relaxed text-blue-100 text-sm">
+                                    أنشئ حسابك اليوم واحصل على رعاية طبية شاملة
+                                    مع فريقنا المتخصص. نظام آمن وسهل الاستخدام
+                                    لتجربة رعاية صحية استثنائية.
+                                </p>
                             </div>
-                            <div className="w-1/2   h-40 flex flex-col justify-center items-center">
-                                <input
-                                    type="file"
-                                    name=""
-                                    onChange={(e) => {
-                                        setData("avatar", e.target.files[0]);
-                                        setNwImg(e.target.files[0]);
-                                    }}
-                                    id="addimg"
-                                    className="hidden"
-                                />
-                                <img
-                                    src={
-                                        newImg
-                                            ? URL.createObjectURL(newImg)
-                                            : "/images/imgplacholder.jpg"
-                                    }
-                                    className="object-cover h-36 w-40 rounded-md"
-                                    alt=""
-                                />
-                                <label
-                                    htmlFor="addimg"
-                                    className="cursor-pointer text-blue-500 flex items-center p-2 gap-2"
-                                >
-                                    {newImg ? (
-                                        "تم تحميل الصورة . انقر لتغييرها"
-                                    ) : (
-                                        <>
-                                            {" "}
-                                            تحميل صورة شخصية <FaUpload />{" "}
-                                        </>
-                                    )}
-                                </label>
+
+                            <div className="mt-8 space-y-3">
+                                {[
+                                    {
+                                        icon: <FaLock />,
+                                        text: "سجلك الطبي الآمن",
+                                    },
+                                    {
+                                        icon: <FaHandHoldingMedical />,
+                                        text: "متابعة صحية دقيقة",
+                                    },
+                                    {
+                                        icon: <FaRegBell />,
+                                        text: "تذكير بالمواعيد",
+                                    },
+                                ].map((feature, index) => (
+                                    <div
+                                        key={index}
+                                        className="flex items-center gap-2 text-blue-100 text-sm"
+                                    >
+                                        <span className="text-lg">
+                                            {feature.icon}
+                                        </span>
+                                        <span>{feature.text}</span>
+                                    </div>
+                                ))}
                             </div>
                         </div>
 
-                        <form onSubmit={submit}>
-                            <div className="space-y-6">
-                                {/*  */}
-                                <div className="space-y-2">
-                                    <label
-                                        for="name"
-                                        className="block text-sm font-medium text-gray-700"
-                                    >
-                                        اسم المستخدم
-                                    </label>
-                                    <TextInput
-                                        id="name"
-                                        type="text"
-                                        placeholder="الاسم"
-                                        value={data.name}
-                                        autoComplete="username"
-                                        isFocused={true}
-                                        onChange={(e) =>
-                                            setData("name", e.target.value)
-                                        }
-                                        className="w-full h-12 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                    />
-                                    <InputError
-                                        message={errors.name}
-                                        className="mt-2"
-                                    />
+                        <div className="absolute -right-16 -bottom-16 w-60 h-60 opacity-10">
+                            <svg
+                                viewBox="0 0 200 200"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    fill="currentColor"
+                                    d="M45,-70.8C58.1,-63.8,68.7,-51.5,75.3,-37.2C81.9,-22.9,84.5,-6.6,82.6,9.1C80.7,24.8,74.3,40,63.5,51.6C52.7,63.2,37.5,71.2,21.7,75.7C5.9,80.2,-10.5,81.2,-25.3,77.1C-40.1,73,-53.2,63.8,-63.1,51.6C-73,39.4,-79.6,24.2,-81.2,8.1C-82.8,-8,-79.4,-24.9,-71.5,-38.8C-63.6,-52.7,-51.2,-63.5,-37.1,-70.2C-23,-76.8,-7.2,-79.2,7.1,-79.4C21.4,-79.6,31.9,-77.7,45,-70.8Z"
+                                    transform="translate(100 100)"
+                                />
+                            </svg>
+                        </div>
+
+                        <div className="absolute top-1/4 left-8 opacity-20 animate-float">
+                            <FaHeart className="w-6 h-6" />
+                        </div>
+                        <div
+                            className="absolute bottom-1/3 right-16 opacity-20 animate-float"
+                            style={{ animationDelay: "1s" }}
+                        >
+                            <FaStethoscope className="w-8 h-8" />
+                        </div>
+                        <div
+                            className="absolute top-1/2 right-8 opacity-20 animate-float"
+                            style={{ animationDelay: "2s" }}
+                        >
+                            <FaUserMd className="w-10 h-10" />
+                        </div>
+                    </div>
+
+                    <div className="p-6 md:p-8 md:w-3/5 flex items-center justify-center bg-white">
+                        <div className="w-full max-w-4xl">
+                            <div className="flex gap-6 mb-6">
+                                <div className="w-3/5">
+                                    <div className="flex items-center gap-2 mb-4">
+                                        <div className="p-2 bg-blue-100 rounded-full">
+                                            <FaUserPlus className="w-5 h-5 text-blue-600" />
+                                        </div>
+                                        <h1 className="text-2xl font-bold text-gray-800">
+                                            إنشاء حساب جديد
+                                        </h1>
+                                    </div>
+                                    <p className="text-gray-600 text-sm mb-4">
+                                        املأ البيانات التالية لإنشاء حسابك
+                                    </p>
+
+                                    <div className="text-center p-3 bg-blue-50 rounded-lg">
+                                        <span className="text-gray-600 text-sm">
+                                            لديك حساب بالفعل؟{" "}
+                                        </span>
+                                        <Link
+                                            href={route("login")}
+                                            className="text-blue-600 font-semibold hover:text-blue-800 transition-colors duration-200 text-sm"
+                                        >
+                                            سجل دخول من هنا
+                                        </Link>
+                                    </div>
                                 </div>
-                                {/*  */}
-                                <div className="flex items-center gap-2 w-full">
-                                    <div className="space-y-2 w-1/2">
+                                <div className="w-2/5 flex flex-col items-center">
+                                    <input
+                                        type="file"
+                                        onChange={(e) => {
+                                            setData(
+                                                "avatar",
+                                                e.target.files[0]
+                                            );
+                                            setNwImg(e.target.files[0]);
+                                        }}
+                                        id="addimg"
+                                        className="hidden"
+                                    />
+                                    <img
+                                        src={
+                                            newImg
+                                                ? URL.createObjectURL(newImg)
+                                                : "/images/imgplacholder.jpg"
+                                        }
+                                        className="object-cover h-28 w-32 rounded-lg border-2 border-gray-300 hover:border-blue-500 transition-colors duration-200"
+                                        alt="الصورة الشخصية"
+                                    />
+                                    <label
+                                        htmlFor="addimg"
+                                        className="cursor-pointer text-blue-500 flex items-center p-2 gap-1 text-xs hover:text-blue-700 transition-colors duration-200"
+                                    >
+                                        {newImg ? (
+                                            "تم التحميل - انقر للتغيير"
+                                        ) : (
+                                            <>
+                                                تحميل صورة <FaUpload />
+                                            </>
+                                        )}
+                                    </label>
+                                </div>
+                            </div>
+
+                            <form onSubmit={submit}>
+                                <div className="grid grid-cols-2 gap-4">
+                                    <div className="space-y-2">
                                         <label
-                                            for="birth"
-                                            className="block text-sm font-medium text-gray-700"
+                                            htmlFor="name"
+                                            className="block text-sm font-semibold text-gray-700 text-right"
+                                        >
+                                            الاسم الكامل
+                                        </label>
+                                        <div className="relative">
+                                            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                                <FaUser className="text-gray-400 text-sm" />
+                                            </div>
+                                            <TextInput
+                                                id="name"
+                                                type="text"
+                                                placeholder="الاسم الكامل"
+                                                value={data.name}
+                                                autoComplete="name"
+                                                isFocused={true}
+                                                onChange={(e) =>
+                                                    setData(
+                                                        "name",
+                                                        e.target.value
+                                                    )
+                                                }
+                                                className="w-full h-10 pr-3 pl-9 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-sm"
+                                            />
+                                        </div>
+                                        <InputError
+                                            message={errors.name}
+                                            className="mt-1 text-right text-xs"
+                                        />
+                                    </div>
+
+                                    <div className="space-y-2">
+                                        <label
+                                            htmlFor="email"
+                                            className="block text-sm font-semibold text-gray-700 text-right"
+                                        >
+                                            البريد الإلكتروني
+                                        </label>
+                                        <div className="relative">
+                                            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                                <FaEnvelope className="text-gray-400 text-sm" />
+                                            </div>
+                                            <TextInput
+                                                id="email"
+                                                type="email"
+                                                placeholder="example@domain.com"
+                                                value={data.email}
+                                                autoComplete="email"
+                                                onChange={(e) =>
+                                                    setData(
+                                                        "email",
+                                                        e.target.value
+                                                    )
+                                                }
+                                                className="w-full h-10 pr-3 pl-9 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-sm"
+                                            />
+                                        </div>
+                                        <InputError
+                                            message={errors.email}
+                                            className="mt-1 text-right text-xs"
+                                        />
+                                    </div>
+
+                                    <div className="space-y-2">
+                                        <label
+                                            htmlFor="birth"
+                                            className="block text-sm font-semibold text-gray-700 text-right"
                                         >
                                             تاريخ الميلاد
                                         </label>
-                                        <TextInput
-                                            id="birth"
-                                            type="date"
-                                            value={data.birth}
-                                            onChange={(e) =>
-                                                setData("birth", e.target.value)
-                                            }
-                                            className="w-full h-12 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                        />
+                                        <div className="relative">
+                                            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                                <FaCalendarAlt className="text-gray-400 text-sm" />
+                                            </div>
+                                            <TextInput
+                                                id="birth"
+                                                type="date"
+                                                value={data.birth}
+                                                onChange={(e) =>
+                                                    setData(
+                                                        "birth",
+                                                        e.target.value
+                                                    )
+                                                }
+                                                className="w-full h-10 pr-3 pl-9 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-sm"
+                                            />
+                                        </div>
                                         <InputError
                                             message={errors.birth}
-                                            className="mt-2"
+                                            className="mt-1 text-right text-xs"
                                         />
                                     </div>
-                                    <div className="space-y-2 w-1/2">
+
+                                    <div className="space-y-2">
                                         <label
-                                            for="gender"
-                                            className="block text-sm font-medium text-gray-700"
+                                            htmlFor="gender"
+                                            className="block text-sm font-semibold text-gray-700 text-right"
                                         >
                                             الجنس
                                         </label>
-                                        <select
-                                            name="gender"
-                                            id="gender"
-                                            className="w-full h-12 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                            onChange={(e) =>
-                                                setData(
-                                                    "gender",
-                                                    e.target.value
-                                                )
-                                            }
-                                        >
-                                            <option value="ذكر">ذكر</option>
-                                            <option value="انثى">انثى</option>
-                                        </select>
-
+                                        <div className="relative">
+                                            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                                <FaVenusMars className="text-gray-400 text-sm" />
+                                            </div>
+                                            <select
+                                                name="gender"
+                                                id="gender"
+                                                className="w-full h-10 pr-3 pl-9 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-sm"
+                                                onChange={(e) =>
+                                                    setData(
+                                                        "gender",
+                                                        e.target.value
+                                                    )
+                                                }
+                                            >
+                                                <option value="ذكر">ذكر</option>
+                                                <option value="انثى">
+                                                    أنثى
+                                                </option>
+                                            </select>
+                                        </div>
                                         <InputError
                                             message={errors.gender}
-                                            className="mt-2"
+                                            className="mt-1 text-right text-xs"
+                                        />
+                                    </div>
+
+                                    <div className="space-y-2">
+                                        <label
+                                            htmlFor="blood_type"
+                                            className="block text-sm font-semibold text-gray-700 text-right"
+                                        >
+                                            زمرة الدم
+                                        </label>
+                                        <div className="flex items-center gap-2">
+                                            <div className="relative w-3/4">
+                                                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                                    <FaTint className="text-gray-400 text-sm" />
+                                                </div>
+                                                <select
+                                                    name="blood_type"
+                                                    value={data.blood_type}
+                                                    onChange={(e) =>
+                                                        setData(
+                                                            "blood_type",
+                                                            e.target.value
+                                                        )
+                                                    }
+                                                    className="w-full h-10 pr-3 pl-9 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-sm"
+                                                >
+                                                    <option value="O">O</option>
+                                                    <option value="A">A</option>
+                                                    <option value="B">B</option>
+                                                    <option value="AB">
+                                                        AB
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <select
+                                                name="blood_resos"
+                                                value={data.blood_resos}
+                                                onChange={(e) =>
+                                                    setData(
+                                                        "blood_resos",
+                                                        e.target.value
+                                                    )
+                                                }
+                                                className="w-1/4 h-10 px-2 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-sm"
+                                            >
+                                                <option value="+">+</option>
+                                                <option value="-">-</option>
+                                            </select>
+                                        </div>
+                                        <InputError
+                                            message={errors.blood_resos}
+                                            className="mt-1 text-right text-xs"
+                                        />
+                                    </div>
+
+                                    <div className="space-y-2">
+                                        <label
+                                            htmlFor="additional_case"
+                                            className="block text-sm font-semibold text-gray-700 text-right"
+                                        >
+                                            حساسية أو أمراض مزمنة
+                                        </label>
+                                        <div className="relative">
+                                            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                                <FaNotesMedical className="text-gray-400 text-sm" />
+                                            </div>
+                                            <TextInput
+                                                id="additional_case"
+                                                type="text"
+                                                placeholder="اكتب: لا يوجد (إن لم تكن)"
+                                                value={data.additional_case}
+                                                onChange={(e) =>
+                                                    setData(
+                                                        "additional_case",
+                                                        e.target.value
+                                                    )
+                                                }
+                                                className="w-full h-10 pr-3 pl-9 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-sm"
+                                            />
+                                        </div>
+                                        <InputError
+                                            message={errors.additional_case}
+                                            className="mt-1 text-right text-xs"
+                                        />
+                                    </div>
+
+                                    <div className="space-y-2">
+                                        <label
+                                            htmlFor="password"
+                                            className="block text-sm font-semibold text-gray-700 text-right"
+                                        >
+                                            كلمة المرور
+                                        </label>
+                                        <div className="relative">
+                                            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                                <FaLock className="text-gray-400 text-sm" />
+                                            </div>
+                                            <TextInput
+                                                id="password"
+                                                type="password"
+                                                placeholder="كلمة المرور"
+                                                value={data.password}
+                                                autoComplete="new-password"
+                                                onChange={(e) =>
+                                                    setData(
+                                                        "password",
+                                                        e.target.value
+                                                    )
+                                                }
+                                                className="w-full h-10 pr-3 pl-9 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-sm"
+                                            />
+                                        </div>
+                                        <InputError
+                                            message={errors.password}
+                                            className="mt-1 text-right text-xs"
+                                        />
+                                    </div>
+
+                                    <div className="space-y-2">
+                                        <label
+                                            htmlFor="password_confirmation"
+                                            className="block text-sm font-semibold text-gray-700 text-right"
+                                        >
+                                            تأكيد كلمة المرور
+                                        </label>
+                                        <div className="relative">
+                                            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                                <FaLock className="text-gray-400 text-sm" />
+                                            </div>
+                                            <TextInput
+                                                id="password_confirmation"
+                                                type="password"
+                                                name="password_confirmation"
+                                                placeholder="تأكيد كلمة المرور"
+                                                value={
+                                                    data.password_confirmation
+                                                }
+                                                autoComplete="new-password"
+                                                onChange={(e) =>
+                                                    setData(
+                                                        "password_confirmation",
+                                                        e.target.value
+                                                    )
+                                                }
+                                                className="w-full h-10 pr-3 pl-9 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-sm"
+                                            />
+                                        </div>
+                                        <InputError
+                                            message={
+                                                errors.password_confirmation
+                                            }
+                                            className="mt-1 text-right text-xs"
                                         />
                                     </div>
                                 </div>
-                                <div className="space-y-2">
-                                    <label
-                                        for="blood_type"
-                                        className="block text-sm font-medium text-gray-700"
-                                    >
-                                        زمرة الدم
-                                    </label>
-                                    <div className="flex items-center gap-1">
-                                        <select
-                                            name="blood_type"
-                                            value={data.blood_type}
-                                            onChange={(e) =>
-                                                setData(
-                                                    "blood_type",
-                                                    e.target.value
-                                                )
-                                            }
-                                            id="dd"
-                                            className="w-full h-12 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                        >
-                                            <option value="O">O</option>
-                                            <option value="A">A</option>
-                                            <option value="B">B</option>
-                                            <option value="AB">AB</option>
-                                        </select>
-                                        <select
-                                            name="blood_resos"
-                                            value={data.blood_resos}
-                                            onChange={(e) =>
-                                                setData(
-                                                    "blood_resos",
-                                                    e.target.value
-                                                )
-                                            }
-                                            id="ff"
-                                            className="w-1/3 h-12 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                        >
-                                            <option value="+">+</option>
-                                            <option value="-">-</option>
-                                        </select>
-                                    </div>
-                                    <InputError
-                                        message={errors.blood_resos}
-                                        className="mt-2"
-                                    />
-                                </div>
-                                <div className="space-y-2">
-                                    <label
-                                        for="email"
-                                        className="block text-sm font-medium text-gray-700"
-                                    >
-                                        حساسية او امراض مزمنة
-                                    </label>
-                                    <TextInput
-                                        id="additional_case"
-                                        type="text"
-                                        placeholder={
-                                            "اذا كنت لا تعاني منها اكتب : لا يوجد"
-                                        }
-                                        value={data.additional_case}
-                                        onChange={(e) =>
-                                            setData(
-                                                "additional_case",
-                                                e.target.value
-                                            )
-                                        }
-                                        className="w-full h-12 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                    />
-                                    <InputError
-                                        message={errors.additional_case}
-                                        className="mt-2"
-                                    />
-                                </div>
-                                <div className="space-y-2">
-                                    <label
-                                        for="email"
-                                        className="block text-sm font-medium text-gray-700"
-                                    >
-                                        البريد الالكتروني
-                                    </label>
-                                    <TextInput
-                                        id="email"
-                                        type="text"
-                                        placeholder="البريد الالكتروني"
-                                        value={data.email}
-                                        autoComplete="username"
-                                        onChange={(e) =>
-                                            setData("email", e.target.value)
-                                        }
-                                        className="w-full h-12 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                    />
-                                    <InputError
-                                        message={errors.email}
-                                        className="mt-2"
-                                    />
-                                </div>
-                                <div className="space-y-2">
-                                    <label
-                                        for="password"
-                                        className="block text-sm font-medium text-gray-700"
-                                    >
-                                        كلمة المرور
-                                    </label>
-                                    <TextInput
-                                        id="password"
-                                        type="password"
-                                        placeholder="كلمة المرور"
-                                        value={data.password}
-                                        autoComplete="current-password"
-                                        onChange={(e) =>
-                                            setData("password", e.target.value)
-                                        }
-                                        className="w-full h-12 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                    />
-                                    <InputError
-                                        message={errors.password}
-                                        className="mt-2"
-                                    />
-                                </div>
-                                <div className="space-y-2">
-                                    <label
-                                        for="password"
-                                        className="block text-sm font-medium text-gray-700"
-                                    >
-                                        تأكيد كلمة المرور
-                                    </label>
-                                    <TextInput
-                                        id="password_confirmation"
-                                        type="password"
-                                        name="password_confirmation"
-                                        value={data.password_confirmation}
-                                        autoComplete="new-password"
-                                        onChange={(e) =>
-                                            setData(
-                                                "password_confirmation",
-                                                e.target.value
-                                            )
-                                        }
-                                        className="w-full h-12 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                    />
-                                    <InputError
-                                        message={errors.password_confirmation}
-                                        className="mt-2"
-                                    />
-                                </div>
 
-                                <button
-                                    type="submit"
-                                    disabled={processing}
-                                    className="w-full h-12 disabled:bg-blue-200 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-md transition duration-200"
-                                >
-                                    انشئ حساب
-                                </button>
+                                <div className="mt-6">
+                                    <button
+                                        type="submit"
+                                        disabled={processing}
+                                        className="w-full h-11 disabled:bg-blue-300 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold rounded-lg transition-all duration-200 transform hover:scale-105 disabled:hover:scale-100 shadow-lg disabled:shadow-none flex items-center justify-center gap-2 text-sm"
+                                    >
+                                        {processing ? (
+                                            <>
+                                                <FaSpinner className="animate-spin" />
+                                                جاري إنشاء الحساب...
+                                            </>
+                                        ) : (
+                                            <>
+                                                <FaUserPlus />
+                                                إنشاء حساب جديد
+                                            </>
+                                        )}
+                                    </button>
+                                </div>
+                            </form>
+
+                            <div className="mt-4 text-center">
+                                <div className="flex items-center justify-center gap-4 text-xs text-gray-500">
+                                    <div className="flex items-center gap-1">
+                                        <FaShieldAlt className="text-green-500" />
+                                        <span>بياناتك محمية</span>
+                                    </div>
+                                    <div className="flex items-center gap-1">
+                                        <FaHeart className="text-red-500" />
+                                        <span>رعاية متميزة</span>
+                                    </div>
+                                </div>
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -92,72 +92,60 @@ export default function Welcome({ auth, doctors }) {
     return (
         <div
             id="toplevel"
-            className=" text-right text-gray-800 bg-gray-50 font-amirirg scroll-smooth"
+            className="text-right text-gray-800 bg-white font-tajawal scroll-smooth"
         >
-            <Head title=" الرئيسية" />
-            <nav className="bg-blue-800 text-white p-2 flex justify-between items-center shadow-lg sticky top-0 z-50">
-                <div className=" font-bold">
-                    {" "}
-                    <ApplicationLogo className=" w-10 h-10" />
+            <Head title="الرئيسية" />
+
+            <nav className="bg-gradient-to-l from-blue-700 to-blue-900 text-white p-4 flex justify-between items-center shadow-lg sticky top-0 z-50">
+                <div className="font-bold">
+                    <ApplicationLogo className="w-12 h-12" />
                 </div>
-                <ul className="flex gap-6 items-center">
-                    <li>
-                        <a
-                            href="#home"
-                            className="hover:text-yellow-300 transition duration-300"
-                        >
-                            الرئيسية
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            href="#about"
-                            className="hover:text-yellow-300 transition duration-300"
-                        >
-                            حولنا
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            href="#services"
-                            className="hover:text-yellow-300 transition duration-300"
-                        >
-                            الخدمات
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            href="#doctors"
-                            className="hover:text-yellow-300 transition duration-300"
-                        >
-                            الاطباء
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            href="#contact"
-                            className="hover:text-yellow-300 transition duration-300"
-                        >
-                            اتصل بنا
-                        </a>
-                    </li>
+
+                <ul className="flex gap-8 items-center">
+                    {[
+                        "الرئيسية",
+                        "حولنا",
+                        "الخدمات",
+                        "الأطباء",
+                        "اتصل بنا",
+                    ].map((item, index) => (
+                        <li key={index}>
+                            <a
+                                href={`#${
+                                    item === "الرئيسية"
+                                        ? "home"
+                                        : item === "حولنا"
+                                        ? "about"
+                                        : item === "الخدمات"
+                                        ? "services"
+                                        : item === "الأطباء"
+                                        ? "doctors"
+                                        : "contact"
+                                }`}
+                                className="hover:text-blue-200 transition duration-300 font-medium py-2 px-1 border-b-2 border-transparent hover:border-blue-300"
+                            >
+                                {item}
+                            </a>
+                        </li>
+                    ))}
                 </ul>
-                <ul className="flex gap-6 items-center">
+
+                <ul className="flex gap-4 items-center">
                     {auth.user ? (
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-3">
                             <li>
                                 <Link
                                     href={route("dashboard")}
-                                    className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded"
+                                    className="bg-white text-blue-800 hover:bg-blue-100 px-4 py-2 rounded-lg font-medium transition duration-300 shadow"
                                 >
-                                    الصفحة الرئيسية
+                                    لوحة التحكم
                                 </Link>
                             </li>
                             <li>
                                 <Link
                                     href={route("logout")}
                                     method="POST"
-                                    className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
+                                    className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-medium transition duration-300"
                                 >
                                     تسجيل الخروج
                                 </Link>
@@ -168,7 +156,7 @@ export default function Welcome({ auth, doctors }) {
                             <li>
                                 <Link
                                     href={route("login")}
-                                    className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded"
+                                    className="bg-white text-blue-800 hover:bg-blue-100 px-4 py-2 rounded-lg font-medium transition duration-300 shadow"
                                 >
                                     تسجيل الدخول
                                 </Link>
@@ -176,7 +164,7 @@ export default function Welcome({ auth, doctors }) {
                             <li>
                                 <Link
                                     href={route("register")}
-                                    className="bg-blue-400 hover:bg-blue-500 text-white px-4 py-2 rounded"
+                                    className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg font-medium transition duration-300"
                                 >
                                     إنشاء حساب
                                 </Link>
@@ -188,213 +176,284 @@ export default function Welcome({ auth, doctors }) {
 
             <section
                 id="home"
-                className="relative bg-center bg-cover text-white text-center bg-imm object-top"
+                className="relative bg-gradient-to-r from-blue-800 to-blue-600 text-white text-center py-32"
             >
-                <div className="absolute inset-0 bg-black bg-opacity-50"></div>
-                <div className="relative z-10 p-20">
-                    <h1 className="text-4xl font-bold mb-4 drop-shadow-lg animate-fade-in-down">
+                <div className="container mx-auto px-6">
+                    <h1 className="text-5xl font-bold mb-6 animate-fade-in-down">
                         Med Care
                     </h1>
-                    <p className="text-xl max-w-2xl mx-auto animate-fade-in-up">
+                    <p className="text-xl max-w-2xl mx-auto mb-8 leading-relaxed animate-fade-in-up">
                         نقدم أحدث خدمات التحاليل المخبرية بدقة عالية وكفاءة
-                        متناهية، باستخدام أحدث الأجهزة التقنية.
+                        متناهية، باستخدام أحدث الأجهزة التقنية وبتقنيات طبية
+                        متطورة.
                     </p>
                     <Link
                         href={route("home.about")}
-                        className="inline-block  mt-6 px-8 py-3 bg-yellow-500 text-blue-800 font-semibold rounded-full shadow hover:bg-yellow-600 transition-transform duration-300 hover:scale-105"
+                        className="inline-block mt-4 px-8 py-3 bg-white text-blue-800 font-bold rounded-lg shadow-lg hover:bg-blue-100 transition-transform duration-300 hover:scale-105"
                     >
                         اقرأ المزيد
                     </Link>
                 </div>
             </section>
 
-            <section className="p-10 bg-white">
-                <h2 className="text-3xl font-bold mb-8 text-center">
-                    خدماتنا الأساسية
-                </h2>
-                <div className="grid md:grid-cols-2 gap-8">
-                    <div className="bg-gray-100 p-6 rounded-2xl shadow hover:shadow-xl transform hover:scale-105 transition duration-300">
-                        <h3 className="text-xl font-semibold mb-2">
-                            معدل ضربات القلب
-                        </h3>
-                        <p>
-                            نظام متكامل لمراقبة معدل ضربات القلب على مدار 24
-                            ساعة مع تحليل فوري للبيانات.
-                        </p>
-                    </div>
-                    <div className="bg-gray-100 p-6 rounded-2xl shadow hover:shadow-xl transform hover:scale-105 transition duration-300">
-                        <h3 className="text-xl font-semibold mb-2">
-                            الفحوصات المخبرية
-                        </h3>
-                        <p>
-                            خدمات تحاليل شاملة وسريعة النتائج بمستوى دقة عالمي،
-                            مع فريق تحليل متخصص.
-                        </p>
-                    </div>
-                </div>
-            </section>
-
-            <section className="p-10 bg-gray-50">
-                <h2 className="text-3xl font-bold mb-8 text-center">
-                    خدمات متخصصة
-                </h2>
-                <div className="grid md:grid-cols-3 gap-6">
-                    {[
-                        {
-                            title: "أطباء متميزون",
-                            desc: "فريق طبي من نخبة الأطباء الاستشاريين في مختلف التخصصات الطبية.",
-                            icon: "🩺",
-                        },
-                        {
-                            title: "خدمة 24 ساعة",
-                            desc: "رعاية شاملة على مدار الساعة بأحدث تقنيات التشخيص والعلاج.",
-                            icon: "⏰",
-                        },
-                        {
-                            title: "أقسام الطوارئ",
-                            desc: "استقبال الحالات الحرجة 24/7 مع فريق إسعافي محترف.",
-                            icon: "🚑",
-                        },
-                    ].map((item, idx) => (
-                        <div
-                            key={idx}
-                            className="bg-white p-6 rounded-xl shadow hover:shadow-2xl text-center transform hover:scale-105 transition duration-300"
-                        >
-                            <div className="text-4xl mb-2">{item.icon}</div>
-                            <h3 className="text-xl font-bold mb-2">
-                                {item.title}
-                            </h3>
-                            <p>{item.desc}</p>
-                        </div>
-                    ))}
-                </div>
-            </section>
-
-            <section id="about" className="p-10 bg-white pt-20">
-                <h2 className="text-3xl font-bold mb-8 text-center">حولنا</h2>
-                <div className="grid md:grid-cols-2 gap-6">
-                    {aboutCards.map((item, idx) => (
-                        <div
-                            key={idx}
-                            className="bg-gray-100 p-6 rounded-xl shadow hover:shadow-lg transform hover:scale-105 transition duration-300 text-center"
-                        >
-                            <div className="text-4xl mb-2">{item.icon}</div>
-                            <h3 className="text-xl font-semibold mb-2">
-                                {item.title}
-                            </h3>
-                            <p>{item.desc}</p>
-                        </div>
-                    ))}
-                </div>
-            </section>
-
-            {/* لماذا نختارنا */}
-            <section className="p-10 bg-gray-50">
-                <h2 className="text-3xl font-bold mb-8 text-center">
-                    لماذا تختارنا؟
-                </h2>
-                <div className="grid md:grid-cols-2 gap-6">
-                    {whyUsCards.map((item, idx) => (
-                        <div
-                            key={idx}
-                            className="bg-white p-6 rounded-xl shadow hover:shadow-lg transform hover:scale-105 transition duration-300 text-center"
-                        >
-                            <div className="text-4xl mb-2">{item.icon}</div>
-                            <h3 className="text-xl font-semibold mb-2">
-                                {item.title}
-                            </h3>
-                            <p>{item.desc}</p>
-                        </div>
-                    ))}
-                </div>
-            </section>
-
-            <section id="services" className="p-10 bg-white pt-20">
-                <h2 className="text-3xl font-bold mb-8 text-center">الخدمات</h2>
-                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    {servicesCards.map((item, idx) => (
-                        <div
-                            key={idx}
-                            className="bg-gray-100 p-6 rounded-xl shadow hover:shadow-xl transform hover:scale-105 transition duration-300 text-center"
-                        >
-                            <div className="text-4xl mb-2">{item.icon}</div>
-                            <h3 className="text-lg font-bold mb-2">
-                                {item.title}
-                            </h3>
-                            <p>{item.desc}</p>
-                        </div>
-                    ))}
-                </div>
-            </section>
-
-            {/*  */}
-            <section id="doctors" className="p-10 bg-gray-50 pt-20">
-                <h2 className="text-3xl font-bold mb-8 text-center text-blue-800">
-                    الأطباء
-                </h2>
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {doctors.map((doctor, idx) => (
-                        <div
-                            key={idx}
-                            className="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300 text-center"
-                        >
-                            <div className="mb-4 relative">
-                                <img
-                                    src={
-                                        doctor.employee.avatar
-                                            ? `/storage/${doctor.employee.avatar}`
-                                            : "/images/doctor1.png"
-                                    }
-                                    alt={doctor.employee.name}
-                                    className="w-32 h-32 rounded-full mx-auto object-cover border-4 border-blue-500 transition-all duration-300 hover:scale-110"
-                                />
+            <section className="py-16 bg-blue-50">
+                <div className="container mx-auto px-6">
+                    <h2 className="text-3xl font-bold mb-12 text-center text-blue-800">
+                        خدماتنا الأساسية
+                    </h2>
+                    <div className="grid md:grid-cols-2 gap-10 max-w-4xl mx-auto">
+                        <div className="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transform hover:scale-105 transition duration-300 border-l-4 border-blue-500">
+                            <div className="text-blue-600 text-3xl mb-4">
+                                ❤️
                             </div>
-                            <h3 className="text-2xl font-semibold text-blue-800 mb-2">
-                                {" "}
-                                {doctor.employee.name}
+                            <h3 className="text-xl font-semibold mb-4 text-blue-800">
+                                معدل ضربات القلب
                             </h3>
-                            <p className="text-lg text-gray-700 font-medium">
-                                {" "}
-                                {doctor.employee.specialty.title}
-                            </p>
-                            <p className="text-sm text-gray-500 mt-2">
-                                {doctor.employee.license}
+                            <p className="text-gray-600 leading-relaxed">
+                                نظام متكامل لمراقبة معدل ضربات القلب على مدار 24
+                                ساعة مع تحليل فوري للبيانات وتقارير طبية مفصلة.
                             </p>
                         </div>
-                    ))}
-                </div>
-            </section>
-
-            <section id="contact" className="p-10 bg-gray-50">
-                <h2 className="text-3xl font-bold mb-8 text-center">
-                    اتصل بنا
-                </h2>
-                <div className="max-w-3xl mx-auto grid md:grid-cols-2 gap-8">
-                    <div className="bg-white p-6 rounded-xl shadow hover:shadow-xl transform hover:scale-105 transition duration-300">
-                        <h3 className="text-xl font-semibold mb-2">
-                            📧 البريد الإلكتروني
-                        </h3>
-                        <ul className="space-y-2">
-                            <li>info@hospital.com</li>
-                            <li>support@hospital.com</li>
-                            <li>emergency@hospital.com</li>
-                        </ul>
-                    </div>
-                    <div className="bg-white p-6 rounded-xl shadow hover:shadow-xl transform hover:scale-105 transition duration-300">
-                        <h3 className="text-xl font-semibold mb-2">
-                            📞 أرقام الهاتف
-                        </h3>
-                        <ul className="space-y-2">
-                            <li>+966 123 456 789</li>
-                            <li>+966 987 654 321</li>
-                            <li>+966 555 666 777</li>
-                        </ul>
+                        <div className="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transform hover:scale-105 transition duration-300 border-l-4 border-blue-500">
+                            <div className="text-blue-600 text-3xl mb-4">
+                                🔬
+                            </div>
+                            <h3 className="text-xl font-semibold mb-4 text-blue-800">
+                                الفحوصات المخبرية
+                            </h3>
+                            <p className="text-gray-600 leading-relaxed">
+                                خدمات تحاليل شاملة وسريعة النتائج بمستوى دقة
+                                عالمي، مع فريق تحليل متخصص وأحدث التقنيات
+                                المخبرية.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            <footer className="bg-blue-800 text-white text-center p-4 mt-8">
-                © 2025 Med Care - جميع الحقوق محفوظة.
+            <section className="py-16 bg-white">
+                <div className="container mx-auto px-6">
+                    <h2 className="text-3xl font-bold mb-12 text-center text-blue-800">
+                        خدمات متخصصة
+                    </h2>
+                    <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                        {[
+                            {
+                                title: "أطباء متميزون",
+                                desc: "فريق طبي من نخبة الأطباء الاستشاريين في مختلف التخصصات الطبية.",
+                                icon: "🩺",
+                                color: "blue",
+                            },
+                            {
+                                title: "خدمة 24 ساعة",
+                                desc: "رعاية شاملة على مدار الساعة بأحدث تقنيات التشخيص والعلاج.",
+                                icon: "⏰",
+                                color: "blue",
+                            },
+                            {
+                                title: "أقسام الطوارئ",
+                                desc: "استقبال الحالات الحرجة 24/7 مع فريق إسعافي محترف.",
+                                icon: "🚑",
+                                color: "blue",
+                            },
+                        ].map((item, idx) => (
+                            <div
+                                key={idx}
+                                className="bg-gradient-to-br from-blue-50 to-white p-8 rounded-2xl shadow-md hover:shadow-2xl text-center transform hover:scale-105 transition duration-300 border border-blue-100"
+                            >
+                                <div className="text-5xl mb-4 text-blue-600">
+                                    {item.icon}
+                                </div>
+                                <h3 className="text-xl font-bold mb-4 text-blue-800">
+                                    {item.title}
+                                </h3>
+                                <p className="text-gray-600">{item.desc}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            <section id="about" className="py-16 bg-blue-50">
+                <div className="container mx-auto px-6">
+                    <h2 className="text-3xl font-bold mb-12 text-center text-blue-800">
+                        حولنا
+                    </h2>
+                    <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                        {aboutCards.map((item, idx) => (
+                            <div
+                                key={idx}
+                                className="bg-white p-8 rounded-2xl shadow-md hover:shadow-lg transform hover:scale-105 transition duration-300 text-center border border-blue-100"
+                            >
+                                <div className="text-4xl mb-4 text-blue-600">
+                                    {item.icon}
+                                </div>
+                                <h3 className="text-xl font-semibold mb-4 text-blue-800">
+                                    {item.title}
+                                </h3>
+                                <p className="text-gray-600">{item.desc}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            <section className="py-16 bg-white">
+                <div className="container mx-auto px-6">
+                    <h2 className="text-3xl font-bold mb-12 text-center text-blue-800">
+                        لماذا تختارنا؟
+                    </h2>
+                    <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                        {whyUsCards.map((item, idx) => (
+                            <div
+                                key={idx}
+                                className="bg-gradient-to-br from-blue-50 to-white p-8 rounded-2xl shadow-md hover:shadow-lg transform hover:scale-105 transition duration-300 text-center border border-blue-100"
+                            >
+                                <div className="text-4xl mb-4 text-blue-600">
+                                    {item.icon}
+                                </div>
+                                <h3 className="text-xl font-semibold mb-4 text-blue-800">
+                                    {item.title}
+                                </h3>
+                                <p className="text-gray-600">{item.desc}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            <section id="services" className="py-16 bg-blue-50">
+                <div className="container mx-auto px-6">
+                    <h2 className="text-3xl font-bold mb-12 text-center text-blue-800">
+                        الخدمات
+                    </h2>
+                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+                        {servicesCards.map((item, idx) => (
+                            <div
+                                key={idx}
+                                className="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transform hover:scale-105 transition duration-300 text-center border border-blue-100"
+                            >
+                                <div className="text-4xl mb-4 text-blue-600">
+                                    {item.icon}
+                                </div>
+                                <h3 className="text-lg font-bold mb-3 text-blue-800">
+                                    {item.title}
+                                </h3>
+                                <p className="text-gray-600 text-sm">
+                                    {item.desc}
+                                </p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            <section id="doctors" className="py-16 bg-white">
+                <div className="container mx-auto px-6">
+                    <h2 className="text-3xl font-bold mb-12 text-center text-blue-800">
+                        فريق الأطباء
+                    </h2>
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                        {doctors.map((doctor, idx) => (
+                            <div
+                                key={idx}
+                                className="bg-gradient-to-br from-blue-50 to-white p-6 rounded-2xl shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300 text-center border border-blue-100"
+                            >
+                                <div className="mb-4 relative">
+                                    <img
+                                        src={
+                                            doctor.employee.avatar
+                                                ? `/storage/${doctor.employee.avatar}`
+                                                : "/images/doctor1.png"
+                                        }
+                                        alt={doctor.employee.name}
+                                        className="w-32 h-32 rounded-full mx-auto object-cover border-4 border-blue-500 transition-all duration-300 hover:scale-110"
+                                    />
+                                </div>
+                                <h3 className="text-xl font-semibold text-blue-800 mb-2">
+                                    {doctor.employee.name}
+                                </h3>
+                                <p className="text-lg text-blue-600 font-medium">
+                                    {doctor.employee.specialty.title}
+                                </p>
+                                <p className="text-sm text-gray-500 mt-2">
+                                    {doctor.employee.license}
+                                </p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            <section id="contact" className="py-16 bg-blue-50">
+                <div className="container mx-auto px-6">
+                    <h2 className="text-3xl font-bold mb-12 text-center text-blue-800">
+                        اتصل بنا
+                    </h2>
+                    <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
+                        <div className="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transform hover:scale-105 transition duration-300 border border-blue-100">
+                            <div className="text-blue-600 text-3xl mb-4">
+                                📧
+                            </div>
+                            <h3 className="text-xl font-semibold mb-4 text-blue-800">
+                                البريد الإلكتروني
+                            </h3>
+                            <ul className="space-y-3 text-gray-600">
+                                <li className="flex items-center">
+                                    <span className="ml-2">
+                                        info@hospital.com
+                                    </span>
+                                </li>
+                                <li className="flex items-center">
+                                    <span className="ml-2">
+                                        support@hospital.com
+                                    </span>
+                                </li>
+                                <li className="flex items-center">
+                                    <span className="ml-2">
+                                        emergency@hospital.com
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div className="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transform hover:scale-105 transition duration-300 border border-blue-100">
+                            <div className="text-blue-600 text-3xl mb-4">
+                                📞
+                            </div>
+                            <h3 className="text-xl font-semibold mb-4 text-blue-800">
+                                أرقام الهاتف
+                            </h3>
+                            <ul className="space-y-3 text-gray-600">
+                                <li className="flex items-center">
+                                    <span className="ml-2">
+                                        +966 123 456 789
+                                    </span>
+                                </li>
+                                <li className="flex items-center">
+                                    <span className="ml-2">
+                                        +966 987 654 321
+                                    </span>
+                                </li>
+                                <li className="flex items-center">
+                                    <span className="ml-2">
+                                        +966 555 666 777
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <footer className="bg-gradient-to-l from-blue-800  to-blue-900 text-white text-center p-6">
+                <div className="container mx-auto">
+                    <p className="text-lg">
+                        © 2025 Med Care - جميع الحقوق محفوظة.
+                    </p>
+                    <p className="mt-2 text-blue-200">
+                        الرعاية الصحية بمعايير عالمية
+                    </p>
+                </div>
             </footer>
         </div>
     );

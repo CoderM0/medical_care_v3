@@ -146,4 +146,12 @@ class DoctorController extends Controller
 
         return Inertia::render("Doctor/EndedAppointments", ['employee' => $this->getit(), 'appointments' => $appointments]);
     }
+    public function view_profile()
+    {
+        $employee = Employee::with(['specialty', 'department', 'user', "doctor"])->where('user_id', Auth::id())->first();
+        if (!$employee) {
+            return redirect()->route("patient.dashboard");
+        }
+        return Inertia::render('Doctor/DocProfile', ['employee' => $employee]);
+    }
 }
