@@ -25,62 +25,51 @@ export default function BookanAppointment({
 
     return (
         <PatientLayout patient={patient}>
-            <div className="">
-                {/*  */}
-
+            <div className="py-6">
                 {openModal ? (
-                    <div className="absolute top-0 right-[0%] w-full bg-black/30 h-screen  overflow-hidden">
-                        <div class="w-full max-w-lg mx-auto p-8">
-                            <div class="bg-white rounded-lg shadow-lg p-6">
-                                <div className="flex justify-between">
-                                    <h2 class="text-lg font-medium mb-6">
-                                        معلومات الحجز
-                                    </h2>
-                                    <button
-                                        onClick={() => {
-                                            setOpenModal(false);
-                                            setData("reservation", "");
-                                        }}
-                                    >
-                                        <IoMdCloseCircleOutline
-                                            color="red"
-                                            size={"1.7rem"}
-                                        />
-                                    </button>
-                                </div>
+                    <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+                        <div className="bg-white rounded-2xl shadow-xl w-full max-w-md">
+                            <div className="flex justify-between items-center p-6 border-b border-blue-100">
+                                <h2 className="text-xl font-bold text-blue-800">
+                                    معلومات الحجز
+                                </h2>
+                                <button
+                                    onClick={() => {
+                                        setOpenModal(false);
+                                        setData("reservation", "");
+                                    }}
+                                    className="text-red-500 hover:text-red-600 transition-colors"
+                                >
+                                    <IoMdCloseCircleOutline size={24} />
+                                </button>
+                            </div>
 
-                                <div>
-                                    <div class="">
-                                        <div class="">
-                                            <label
-                                                for="card-number"
-                                                class="block text-sm font-medium text-gray-700 mb-2"
-                                            >
-                                                الاعراض الأولية{" "}
-                                            </label>
-                                            <input
-                                                type="text"
-                                                name="details"
-                                                onChange={(e) =>
-                                                    setData(
-                                                        "details",
-                                                        e.target.value
-                                                    )
-                                                }
-                                                id="details"
-                                                placeholder="حرارة ..."
-                                                class="w-full py-3 px-4 border border-gray-400 rounded-lg focus:outline-none focus:border-blue-500"
-                                            />
-                                        </div>
-                                        <p className="border-t my-2"></p>
-                                        <p className="my-2 font-bold text-center">
+                            <div className="p-6">
+                                <div className="space-y-4">
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                                            الأعراض الأولية
+                                        </label>
+                                        <input
+                                            type="text"
+                                            name="details"
+                                            onChange={(e) =>
+                                                setData(
+                                                    "details",
+                                                    e.target.value
+                                                )
+                                            }
+                                            placeholder="مثل: حرارة، صداع..."
+                                            className="w-full py-3 px-4 border border-blue-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                        />
+                                    </div>
+
+                                    <div className="border-t border-blue-100 pt-4">
+                                        <p className="font-bold text-blue-800 text-center mb-4">
                                             معلومات الدفع
                                         </p>
-                                        <div class="">
-                                            <label
-                                                for="card-number"
-                                                class="block text-sm font-medium text-gray-700 mb-2"
-                                            >
+                                        <div>
+                                            <label className="block text-sm font-medium text-gray-700 mb-2">
                                                 رقم الحساب
                                             </label>
                                             <input
@@ -92,136 +81,138 @@ export default function BookanAppointment({
                                                         e.target.value
                                                     )
                                                 }
-                                                id="card-number"
                                                 placeholder="0000 0000 0000 0000"
-                                                class="w-full py-3 px-4 border border-gray-400 rounded-lg focus:outline-none focus:border-blue-500"
+                                                className="w-full py-3 px-4 border border-blue-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                                             />
                                         </div>
 
-                                        <div class="w-full my-2 sm:col-span-1">
-                                            <label
-                                                for="cvv"
-                                                class="block text-sm font-medium text-gray-700 mb-2"
-                                            >
+                                        <div className="mt-3">
+                                            <label className="block text-sm font-medium text-gray-700 mb-2">
                                                 مبلغ الدفع
                                             </label>
-                                            <p class="w-full py-3 px-4 border border-gray-400 rounded-lg focus:outline-none focus:border-blue-500">
+                                            <div className="w-full py-3 px-4 border border-blue-200 bg-blue-50 rounded-lg text-blue-700 font-bold">
                                                 20$
-                                            </p>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="mt-8">
-                                        <button
-                                            onClick={add_reservation}
-                                            type="submit"
-                                            class="w-full flex justify-center items-center bg-green-500 hover:bg-blue-600 text-white font-medium py-3 rounded-lg focus:outline-none"
-                                        >
-                                            {processing ? (
-                                                <FaSpinner
-                                                    size={"1rem"}
-                                                    color="white"
-                                                    className="animate-spin"
-                                                />
-                                            ) : (
-                                                <p> دفع</p>
-                                            )}
-                                        </button>
-                                    </div>
+                                </div>
+
+                                <div className="mt-6">
+                                    <button
+                                        onClick={add_reservation}
+                                        disabled={processing}
+                                        className="w-full flex justify-center items-center gap-2 bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 rounded-lg transition-all duration-200 disabled:opacity-50"
+                                    >
+                                        {processing ? (
+                                            <>
+                                                <FaSpinner className="animate-spin" />
+                                                <span>جاري المعالجة...</span>
+                                            </>
+                                        ) : (
+                                            <span>دفع</span>
+                                        )}
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 ) : (
                     <>
-                        {" "}
-                        <div className="bg-gray-50 shadow-sm flex justify-between items-center px-16">
-                            <h1 className="py-5 font-bold">
-                                المواعيد المتاحة لدى الطبيب{" "}
-                                {doctor.employee.name}
-                            </h1>
+                        <div className="flex justify-between items-center mb-6">
+                            <div>
+                                <h1 className="text-2xl font-bold text-blue-800">
+                                    المواعيد المتاحة لدى الطبيب{" "}
+                                    {doctor.employee.name}
+                                </h1>
+                                <p className="text-gray-600 mt-1">
+                                    اختر الوقت المناسب لحجز موعدك
+                                </p>
+                            </div>
                             <BackBtn />
                         </div>
-                        <div className="flex justify-between w-10/12 mx-auto mt-5 border p-5 rounded-lg">
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                             {availbaleSlotes.map((slot) => {
                                 return (
-                                    <div key={slot.id} className="">
-                                        <p className="text-center">
-                                            {slot.date}
-                                        </p>
-                                        <p className="my-2 font-bold text-center">
-                                            {slot.day_name}
-                                        </p>
-                                        <div className="flex flex-col">
-                                            {!slot.off ? (
-                                                Object.values(
+                                    <div
+                                        key={slot.id}
+                                        className="bg-white border border-blue-100 rounded-xl p-6 shadow-lg"
+                                    >
+                                        <div className="text-center mb-4">
+                                            <p className="text-lg font-bold text-blue-800">
+                                                {slot.date}
+                                            </p>
+                                            <p className="text-blue-600 font-medium">
+                                                {slot.day_name}
+                                            </p>
+                                        </div>
+
+                                        {!slot.off ? (
+                                            <div className="grid grid-cols-2 gap-2">
+                                                {Object.values(
                                                     slot.available_hourse
                                                 ).map((houre) => {
+                                                    const isSelected =
+                                                        data.reservation
+                                                            ?.date ===
+                                                            slot.full_date &&
+                                                        data.reservation
+                                                            ?.time === houre;
                                                     return (
-                                                        <div
+                                                        <button
                                                             key={houre}
-                                                            className="flex gap-2 items-center"
+                                                            onClick={() =>
+                                                                setData(
+                                                                    "reservation",
+                                                                    {
+                                                                        date: slot.full_date,
+                                                                        time: houre,
+                                                                        doctor_id:
+                                                                            doctor.id,
+                                                                    }
+                                                                )
+                                                            }
+                                                            className={`py-2 px-3 rounded-lg text-sm font-medium transition-all duration-200 ${
+                                                                isSelected
+                                                                    ? "bg-blue-500 text-white"
+                                                                    : "bg-blue-50 text-blue-700 hover:bg-blue-100"
+                                                            }`}
                                                         >
-                                                            <input
-                                                                type="radio"
-                                                                id={`${
-                                                                    slot.full_date
-                                                                }-${houre
-                                                                    .split(":")
-                                                                    .join("")}`}
-                                                                name="shitstuff"
-                                                                className="hidden"
-                                                            />
-                                                            <label
-                                                                onClick={() =>
-                                                                    setData(
-                                                                        "reservation",
-                                                                        {
-                                                                            date: slot.full_date,
-                                                                            time: houre,
-                                                                            doctor_id:
-                                                                                doctor.id,
-                                                                        }
-                                                                    )
-                                                                }
-                                                                htmlFor={`${
-                                                                    slot.full_date
-                                                                }-${houre
-                                                                    .split(":")
-                                                                    .join("")}`}
-                                                                className={` inline-block px-7 py-1.5 overflow-hidden text-sm font-semibold transition-transform rounded-full cursor-pointer bg-white text-green-500 hover:bg-green-400/50 text-green-700/70  hover:text-white p-1 my-1
-                                                          `}
-                                                            >
-                                                                {houre}
-                                                            </label>
-                                                        </div>
+                                                            {houre}
+                                                        </button>
                                                     );
-                                                })
-                                            ) : (
-                                                <p className="flex flex-col items-center font-bold text-red-500">
-                                                    عطلة{" "}
-                                                    <MdDeveloperBoardOff
-                                                        size={"2.5rem"}
-                                                        color="red"
-                                                    />{" "}
+                                                })}
+                                            </div>
+                                        ) : (
+                                            <div className="text-center py-4">
+                                                <MdDeveloperBoardOff className="mx-auto text-red-400 text-3xl mb-2" />
+                                                <p className="text-red-500 font-bold">
+                                                    عطلة
                                                 </p>
-                                            )}
-                                        </div>
+                                            </div>
+                                        )}
                                     </div>
                                 );
-                            })}{" "}
+                            })}
                         </div>
-                        <button
-                            className="block w-1/3 mx-auto my-5 text-center bg-green-700 p-2 px-10 rounded-xl text-white font-bold"
-                            onClick={() =>
-                                data.reservation && setOpenModal(true)
-                            }
-                        >
-                            حجز
-                        </button>{" "}
+
+                        <div className="text-center mt-8">
+                            <button
+                                onClick={() =>
+                                    data.reservation && setOpenModal(true)
+                                }
+                                disabled={!data.reservation}
+                                className={`px-8 py-3 rounded-lg font-bold text-white transition-all duration-200 ${
+                                    data.reservation
+                                        ? "bg-green-500 hover:bg-green-600 shadow-lg"
+                                        : "bg-gray-400 cursor-not-allowed"
+                                }`}
+                            >
+                                تأكيد الحجز
+                            </button>
+                        </div>
                     </>
                 )}
-
-                {/*  */}
             </div>
         </PatientLayout>
     );

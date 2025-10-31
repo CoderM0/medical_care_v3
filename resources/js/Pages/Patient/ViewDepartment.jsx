@@ -11,86 +11,95 @@ export default function ViewDepartment({
     console.log(department_doctors);
     return (
         <PatientLayout patient={patient}>
-            {/* <button className="" onClick={() => window.history.back()}>
-                <IoArrowBackCircle size={"2.5rem"} />
-            </button> */}
-            <div className="m-2">
-                <div className="flex justify-between items-center">
-                    <div className="flex gap-1 items-center">
-                        <FaCircleInfo size={"1.2rem"} color="blue" />
-                        <p className="p-1 text-xl">حول القسم</p>
+            <div className="py-6">
+                <div className="flex justify-between items-center mb-6">
+                    <div className="flex gap-2 items-center">
+                        <FaCircleInfo className="text-blue-600 text-lg" />
+                        <p className="text-xl font-bold text-blue-800">
+                            حول القسم
+                        </p>
                     </div>
-                    <div className="flex">
-                        <BackBtn />
-                    </div>
+                    <BackBtn />
                 </div>
 
-                <p className="p-1  rounded-xl">{depdesc}</p>
-            </div>
-            {department_doctors.length > 0 ? (
-                <>
-                    {" "}
-                    <div class="bg-gray-100 py-2 px-4 m-2 ">
-                        <h2 class="text-xl font-semibold text-gray-800">
-                            اطباء قسم {department_doctors[0].department.title}
-                        </h2>
-                    </div>
-                    <ul class="divide-y divide-gray-200">
-                        {department_doctors.map((emp, index) => {
-                            return (
-                                <li
-                                    class="flex items-center py-4 px-6 gap-3 border mx-1 rounded-md"
-                                    key={emp.id}
-                                >
-                                    <span class="text-gray-700 text-lg font-medium mr-4">
-                                        {index + 1 + "."}
-                                    </span>
-                                    <img
-                                        class="w-12 h-12 rounded-full object-cover mr-4"
-                                        src={`/storage/${emp.avatar}`}
-                                        alt="User avatar"
-                                    />
-                                    <div class="flex-1">
-                                        <h3 class="text-lg font-medium text-gray-800">
-                                            {emp.name}
-                                        </h3>
-                                        <p class="text-gray-600 text-base">
-                                            {emp.specialty.title}
-                                        </p>
-                                    </div>
-                                    <div className="flex items-center gap-2 ">
-                                        <Link
-                                            href={route(
-                                                "patient.view_doc",
-                                                emp.id
-                                            )}
-                                            className="p-2 flex items-center gap-1 px-4 mx-2 rounded-lg bg-green-500 text-white"
-                                        >
-                                            عرض
-                                            <FaUserDoctor />
-                                        </Link>
+                <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-8">
+                    <p className="text-gray-700 leading-relaxed">{depdesc}</p>
+                </div>
 
-                                        <Link
-                                            className="p-2 px-4 mx-2  flex items-center gap-1 rounded-lg bg-green-500 text-white"
-                                            href={route(
-                                                "patient.appointment.index",
-                                                emp.doctor.id
-                                            )}
-                                        >
-                                            حجز موعد
-                                            <FaRegAddressBook />
-                                        </Link>
+                {department_doctors.length > 0 ? (
+                    <div>
+                        <div className="bg-gradient-to-r from-blue-500 to-blue-600 text-white py-3 px-6 rounded-lg mb-6">
+                            <h2 className="text-xl font-bold">
+                                أطباء قسم{" "}
+                                {department_doctors[0].department.title}
+                            </h2>
+                        </div>
+
+                        <div className="grid gap-4">
+                            {department_doctors.map((emp, index) => {
+                                return (
+                                    <div
+                                        className="bg-white border border-blue-100 rounded-xl p-4 shadow-lg hover:shadow-xl transition-all duration-300"
+                                        key={emp.id}
+                                    >
+                                        <div className="flex items-center gap-4">
+                                            <div className="flex items-center gap-3 flex-1">
+                                                <span className="text-blue-600 font-bold text-lg w-6">
+                                                    {index + 1}
+                                                </span>
+                                                <img
+                                                    className="w-14 h-14 rounded-full object-cover border-2 border-blue-200"
+                                                    src={`/storage/${emp.avatar}`}
+                                                    alt="صورة الطبيب"
+                                                />
+                                                <div className="flex-1">
+                                                    <h3 className="text-lg font-bold text-blue-900">
+                                                        {emp.name}
+                                                    </h3>
+                                                    <p className="text-blue-600 font-medium">
+                                                        {emp.specialty.title}
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                            <div className="flex items-center gap-2">
+                                                <Link
+                                                    href={route(
+                                                        "patient.view_doc",
+                                                        emp.id
+                                                    )}
+                                                    className="flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-all duration-200 font-medium"
+                                                >
+                                                    <FaUserDoctor />
+                                                    <span>عرض</span>
+                                                </Link>
+
+                                                <Link
+                                                    href={route(
+                                                        "patient.appointment.index",
+                                                        emp.doctor.id
+                                                    )}
+                                                    className="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg transition-all duration-200 font-medium"
+                                                >
+                                                    <FaRegAddressBook />
+                                                    <span>حجز موعد</span>
+                                                </Link>
+                                            </div>
+                                        </div>
                                     </div>
-                                </li>
-                            );
-                        })}
-                    </ul>{" "}
-                </>
-            ) : (
-                <p className="my-5 text-center text-2xl text-green-500 font-bold">
-                    لا يوجد اطباء في هذا القسم بعد
-                </p>
-            )}
+                                );
+                            })}
+                        </div>
+                    </div>
+                ) : (
+                    <div className="text-center py-12">
+                        <div className="text-gray-400 text-6xl mb-4">👨‍⚕️</div>
+                        <p className="text-gray-500 text-xl font-bold">
+                            لا يوجد أطباء في هذا القسم بعد
+                        </p>
+                    </div>
+                )}
+            </div>
         </PatientLayout>
     );
 }

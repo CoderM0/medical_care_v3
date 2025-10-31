@@ -11,57 +11,76 @@ export default function OuterLab({ patient }) {
         lab_date: "",
         lab_test_result: "",
     });
+
     const add_lab_test = (e) => {
         e.preventDefault();
         post(route("patient.save_outer_lab_test", patient.id));
     };
+
     return (
-        <div className="p-5 ">
-            <h1 className="text-center font-bold">اضف تحليل طبي خارجي</h1>
+        <div className="w-full px-4 py-2">
+            <div className="text-center mb-6">
+                <h1 className="text-xl font-bold text-blue-800">
+                    إضافة تحليل طبي خارجي
+                </h1>
+                <p className="text-gray-600 text-sm mt-1">
+                    سجل نتائج التحاليل من خارج العيادة
+                </p>
+            </div>
+
             {processing ? (
-                <Loader />
+                <div className="flex justify-center items-center py-12">
+                    <Loader />
+                </div>
             ) : (
                 <form
-                    className=" mx-auto p-5 border-2 rounded-xl mt-5"
+                    className="bg-white border border-blue-100 rounded-xl p-6 shadow-lg"
                     onSubmit={add_lab_test}
                 >
-                    <div className="my-2">
-                        <div className="my-2">
-                            <InputLabel> تاريخ الوصفة</InputLabel>
+                    <div className="grid gap-4">
+                        <div>
+                            <InputLabel className="text-blue-700 font-medium mb-2">
+                                تاريخ التحليل
+                            </InputLabel>
                             <TextInput
                                 type="date"
                                 value={data.lab_date}
-                                className="my-2 shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
+                                className="w-full p-3 border border-blue-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                                 onChange={(e) =>
                                     setData("lab_date", e.target.value)
                                 }
                             />
                             <InputError
-                                message={errors.doctor_name}
+                                message={errors.lab_date}
                                 className="mt-2"
-                            ></InputError>
+                            />
                         </div>
-                        <div className="my-2 flex flex-col ">
-                            <InputLabel> اسم الطبيب</InputLabel>
+
+                        <div>
+                            <InputLabel className="text-blue-700 font-medium mb-2">
+                                اسم الطبيب
+                            </InputLabel>
                             <TextInput
                                 type="text"
-                                className="my-2 shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
+                                className="w-full p-3 border border-blue-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                                 value={data.doctor_name}
                                 onChange={(e) =>
                                     setData("doctor_name", e.target.value)
                                 }
+                                placeholder="أدخل اسم الطبيب"
                             />
                             <InputError
                                 message={errors.doctor_name}
                                 className="mt-2"
-                            ></InputError>
+                            />
                         </div>
-                        <div className="my-2 flex flex-col ">
-                            <InputLabel>وصفة التحليل</InputLabel>
+
+                        <div>
+                            <InputLabel className="text-blue-700 font-medium mb-2">
+                                وصفة التحليل
+                            </InputLabel>
                             <textarea
-                                name=""
-                                id=""
-                                className="my-2 shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
+                                className="w-full p-3 border border-blue-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                                 value={data.lab_test_description}
                                 onChange={(e) =>
                                     setData(
@@ -69,37 +88,43 @@ export default function OuterLab({ patient }) {
                                         e.target.value
                                     )
                                 }
-                                placeholder="وصفة التحليل"
+                                placeholder="أدخل وصفة التحليل المطلوبة"
                                 rows={4}
                             ></textarea>
                             <InputError
                                 message={errors.lab_test_description}
                                 className="mt-2"
-                            ></InputError>
+                            />
                         </div>
-                        <div className="my-2 flex flex-col ">
-                            <InputLabel>نتيجة التحليل</InputLabel>
+
+                        <div>
+                            <InputLabel className="text-blue-700 font-medium mb-2">
+                                نتيجة التحليل
+                            </InputLabel>
                             <textarea
-                                name=""
-                                id=""
                                 value={data.lab_test_result}
                                 onChange={(e) =>
                                     setData("lab_test_result", e.target.value)
                                 }
-                                placeholder="نتيجة التحليل"
+                                placeholder="أدخل نتائج التحليل"
                                 rows={4}
-                                className="my-2 shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
+                                className="w-full p-3 border border-blue-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                             ></textarea>
                             <InputError
                                 message={errors.lab_test_result}
                                 className="mt-2"
-                            ></InputError>
+                            />
                         </div>
                     </div>
 
-                    <button className="block rounded-xl w-1/3 mx-auto bg-green-500 p-3 text-white">
-                        إضافة
-                    </button>
+                    <div className="text-center mt-6">
+                        <button
+                            className="px-8 py-3 bg-green-500 hover:bg-green-600 text-white rounded-lg font-bold transition-all duration-200 shadow-lg w-full md:w-auto"
+                            type="submit"
+                        >
+                            إضافة التحليل
+                        </button>
+                    </div>
                 </form>
             )}
         </div>

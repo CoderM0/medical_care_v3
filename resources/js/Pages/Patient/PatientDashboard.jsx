@@ -5,54 +5,77 @@ export default function PatientDashboard({ departments, patient }) {
     console.log(patient);
     return (
         <PatientLayout patient={patient}>
-            <div className="">
-                <p className="px-10 p-2 w-full border-t-2 text-indigo-950 underline text-center">
-                    اقسام المشفى
-                </p>
-                <div
-                    className={`flex  px-8 ${
-                        departments.length < 3
-                            ? "justify-start "
-                            : "justify-around "
-                    }  flex-wrap`}
-                >
+            <div className="py-6">
+                <div className="text-center mb-8">
+                    <h1 className="text-2xl font-bold text-blue-800 mb-2">
+                        أقسام المستشفى
+                    </h1>
+                    <p className="text-gray-600 text-sm">
+                        اختر القسم المناسب لحاجتك الطبية
+                    </p>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4">
                     {departments.map((dep) => {
                         return (
-                            <div className="p-2 rounded-xl " key={dep.id}>
-                                <div className="p-2 max-w-lg w-[370px] h-[400px] border border-gray-300 rounded-2xl hover:shadow-xl hover:shadow-indigo-50 flex flex-col ">
-                                    <div class="aspect-w-3 aspect-h-1 rounded-2xl border shadow overflow-hidden bg-gray-100">
-                                        <img
-                                            src={`/storage/${dep.department_img}`}
-                                            loading="lazy"
-                                            className="object-center object-cover h-[200px] w-[490px]"
-                                        />
+                            <div
+                                className="bg-white rounded-2xl border border-blue-100 shadow-lg hover:shadow-xl transition-all duration-300 hover:translate-y-[-4px] overflow-hidden"
+                                key={dep.id}
+                            >
+                                <div className="relative h-48 overflow-hidden">
+                                    <img
+                                        src={`/storage/${dep.department_img}`}
+                                        loading="lazy"
+                                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-blue-900/20 to-transparent"></div>
+                                </div>
+
+                                <div className="p-6">
+                                    <div className="flex items-start justify-between mb-3">
+                                        <h3 className="font-bold text-lg text-blue-900">
+                                            {dep.title}
+                                        </h3>
+                                        <div className="w-2 h-2 bg-blue-500 rounded-full mt-2"></div>
                                     </div>
 
-                                    <div className="mt-8">
-                                        <h4 className="font-bold text-xl">
-                                            {dep.title}
-                                        </h4>
-                                        <p className="mt-2 text-gray-600 h-[50px]">
-                                            {dep.description.slice(0, 50) +
-                                                "..."}
-                                        </p>
-                                        <div className="mt-5">
-                                            <Link
-                                                href={route(
-                                                    "patient.viewDep",
-                                                    dep.id
-                                                )}
-                                                className="block w-1/2 mx-auto text-center rounded-md border border-transparent bg-gray-800 px-3 py-2 text-sm font-medium leading-4 text-white shadow-sm hover:bg-gray-900"
-                                            >
-                                                عرض
-                                            </Link>
-                                        </div>
-                                    </div>
+                                    <p className="text-gray-600 text-sm leading-relaxed mb-4 h-12 overflow-hidden">
+                                        {dep.description.slice(0, 80) + "..."}
+                                    </p>
+
+                                    <Link
+                                        href={route("patient.viewDep", dep.id)}
+                                        className="w-full bg-blue-500 hover:bg-blue-600 text-white text-center font-medium py-3 px-4 rounded-lg transition-all duration-200 flex items-center justify-center gap-2"
+                                    >
+                                        <span>عرض القسم</span>
+                                        <svg
+                                            className="w-4 h-4"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth={2}
+                                                d="M14 5l7 7m0 0l-7 7m7-7H3"
+                                            />
+                                        </svg>
+                                    </Link>
                                 </div>
                             </div>
                         );
                     })}
                 </div>
+
+                {departments.length === 0 && (
+                    <div className="text-center py-12">
+                        <div className="text-gray-400 text-6xl mb-4">🏥</div>
+                        <p className="text-gray-500 text-lg">
+                            لا توجد أقسام متاحة حالياً
+                        </p>
+                    </div>
+                )}
             </div>
         </PatientLayout>
     );

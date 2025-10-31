@@ -7,156 +7,149 @@ export default function ViewPatientProfile({ patient }) {
 
     return (
         <PatientLayout patient={patient}>
-            <div className="container mx-auto my-5 p-5 font-amirirg ">
-                <div className="md:flex no-wrap md:-mx-2 ">
-                    {/* <!-- Left Side --> */}
-                    <div className="w-full md:w-3/12 md:mx-2">
-                        {/* <!-- Profile Card --> */}
-                        <div className="bg-white p-3 border-t-4 border-green-400">
-                            <div className="image overflow-hidden">
-                                <img
-                                    className="h-auto w-full mx-auto"
-                                    src={`/storage/${patient.avatar}`}
-                                    alt=""
-                                />
-                            </div>
-                            <h1 className="text-gray-900 font-bold text-xl text-center my-1">
-                                {patient.name}
+            <div className="py-6">
+                <div className="max-w-6xl mx-auto px-4">
+                    <div className="flex justify-between items-center mb-6">
+                        <div>
+                            <h1 className="text-2xl font-bold text-blue-800">
+                                الملف الشخصي
                             </h1>
+                            <p className="text-gray-600 mt-1">
+                                معلوماتك الشخصية والطبية
+                            </p>
+                        </div>
+                        <BackBtn />
+                    </div>
 
-                            <ul className="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
-                                <li className="flex items-center py-3">
-                                    <span>الحالة</span>
-                                    <span className="ml-auto mx-2">
-                                        <span className="bg-green-500 py-1 px-2 rounded text-white ">
+                    <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+                        <div className="lg:col-span-1">
+                            <div className="bg-white border border-blue-100 rounded-xl p-6 shadow-lg text-center">
+                                <div className="mb-4">
+                                    <img
+                                        className="w-32 h-32 rounded-full mx-auto object-cover border-4 border-blue-200"
+                                        src={`/storage/${patient.avatar}`}
+                                        alt="صورة المريض"
+                                    />
+                                </div>
+                                <h1 className="text-xl font-bold text-blue-800 mb-2">
+                                    {patient.name}
+                                </h1>
+
+                                <div className="space-y-3 mt-4">
+                                    <div className="flex justify-between items-center bg-blue-50 rounded-lg p-3">
+                                        <span className="text-blue-700 font-medium">
+                                            الحالة
+                                        </span>
+                                        <span
+                                            className={`px-3 py-1 rounded-full text-sm font-bold ${
+                                                patient.active
+                                                    ? "bg-green-100 text-green-700"
+                                                    : "bg-red-100 text-red-700"
+                                            }`}
+                                        >
                                             {patient.active ? "نشط" : "غير نشط"}
                                         </span>
-                                    </span>
-                                </li>
-                                <li className="flex items-center py-3">
-                                    <span>انضم بتاريخ</span>
-                                    <span className="ml-auto mx-2">
-                                        {new Date(
-                                            patient.created_at
-                                        ).toLocaleDateString()}
-                                    </span>
-                                </li>
-                            </ul>
-                        </div>
-                        {/* <!-- End of profile card --> */}
-                        <div className="my-4"></div>
-                    </div>
-                    {/* <!-- Right Side --> */}
-                    <div className="w-full md:w-9/12 mx-2 h-64">
-                        {/* <!-- Profile tab --> */}
-                        {/* <!-- About Section --> */}
-                        <div className="bg-white p-3 shadow-sm rounded-sm">
-                            <div className="flex items-center space-x-2 font-bold text-gray-900 leading-8">
-                                <span clas="text-green-500">
-                                    <svg
-                                        className="h-5"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        stroke="currentColor"
-                                    >
-                                        <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                                        />
-                                    </svg>
-                                </span>
-                                <span className="tracking-wide">حول</span>
-                                <div className="flex justify-end w-full">
-                                    {" "}
-                                    <BackBtn />
+                                    </div>
+                                    <div className="flex justify-between items-center bg-blue-50 rounded-lg p-3">
+                                        <span className="text-blue-700 font-medium">
+                                            انضم بتاريخ
+                                        </span>
+                                        <span className="text-gray-600 text-sm">
+                                            {new Date(
+                                                patient.created_at
+                                            ).toLocaleDateString("ar-EG")}
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
-                            <div className="text-gray-700">
-                                <div className="grid md:grid-cols-2 text">
-                                    <div className="grid grid-cols-2 border-t">
-                                        <div className="px-4 py-2 font-semibold">
-                                            الاسم
+                        </div>
+
+                        <div className="lg:col-span-3">
+                            <div className="bg-white border border-blue-100 rounded-xl p-6 shadow-lg">
+                                <div className="flex items-center gap-2 mb-6">
+                                    <div className="w-1 h-6 bg-blue-500 rounded-full"></div>
+                                    <h2 className="text-xl font-bold text-blue-800">
+                                        المعلومات الشخصية
+                                    </h2>
+                                </div>
+
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div className="bg-blue-50 rounded-lg p-4">
+                                        <div className="text-blue-700 font-medium mb-2">
+                                            الاسم الكامل
                                         </div>
-                                        <div className="px-4 py-2">
+                                        <div className="text-gray-800 font-bold text-lg">
                                             {patient.name}
                                         </div>
                                     </div>
-                                    <div className="grid grid-cols-2 border-t"></div>
-                                    <div className="grid grid-cols-2 border-t">
-                                        <div className="px-4 py-2 font-semibold">
+
+                                    <div className="bg-blue-50 rounded-lg p-4">
+                                        <div className="text-blue-700 font-medium mb-2">
                                             الجنس
                                         </div>
-                                        <div className="px-4 py-2">
+                                        <div className="text-gray-800 font-bold text-lg">
                                             {patient.gender}
                                         </div>
                                     </div>
-                                    <div className="grid grid-cols-2 border-t">
-                                        <div className="px-4 py-2 font-semibold">
+
+                                    <div className="bg-blue-50 rounded-lg p-4">
+                                        <div className="text-blue-700 font-medium mb-2">
+                                            العمر
+                                        </div>
+                                        <div className="text-gray-800 font-bold text-lg">
+                                            {patient.age} سنة
+                                        </div>
+                                    </div>
+
+                                    <div className="bg-blue-50 rounded-lg p-4">
+                                        <div className="text-blue-700 font-medium mb-2">
                                             زمرة الدم
                                         </div>
-                                        <div className="px-4 py-2">
+                                        <div className="text-gray-800 font-bold text-lg">
                                             {patient.blood_type}
                                         </div>
                                     </div>
-                                    <div className="grid grid-cols-2 border-t">
-                                        <div className="px-2 py-2 font-semibold">
-                                            حساسية او ملاحظات مرضية سابقة
+
+                                    <div className="bg-blue-50 rounded-lg p-4 md:col-span-2">
+                                        <div className="text-blue-700 font-medium mb-2">
+                                            البريد الإلكتروني
                                         </div>
-                                        <div className="px-4 py-2">
-                                            {patient.additional_case}
-                                        </div>
+                                        <a
+                                            href={`mailto:${patient.user.email}`}
+                                            className="text-blue-600 hover:text-blue-800 font-bold text-lg"
+                                        >
+                                            {patient.user.email}
+                                        </a>
                                     </div>
-                                    <div className="grid grid-cols-2 border-t">
-                                        {/* <div className="px-4 py-2 font-semibold">
-                                            حساسية او ملاحظات مرضية سابقة
+
+                                    {patient.additional_case && (
+                                        <div className="bg-blue-50 rounded-lg p-4 md:col-span-2">
+                                            <div className="text-blue-700 font-medium mb-2">
+                                                الحساسية والملاحظات الطبية
+                                            </div>
+                                            <div className="text-gray-800 leading-relaxed">
+                                                {patient.additional_case}
+                                            </div>
                                         </div>
-                                        <div className="px-4 py-2">
-                                            {patient.additional_case}
-                                        </div> */}
-                                    </div>
-                                    <div className="grid grid-cols-2  border-t">
-                                        <div className="px-4 py-2 font-semibold">
-                                            البريد الالكتروني
-                                        </div>
-                                        <div className="px-4 py-2">
-                                            <a
-                                                className="text-blue-800"
-                                                href="mailto:jane@example.com"
-                                            >
-                                                {patient.user.email}
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div className="grid grid-cols-2 border-t">
-                                        <div className="px-4 py-2 font-semibold">
-                                            العمر
-                                        </div>
-                                        <div className="px-4 py-2">
-                                            {patient.age}
-                                        </div>
-                                    </div>
+                                    )}
+                                </div>
+
+                                <div className="flex flex-col sm:flex-row gap-3 mt-8 pt-6 border-t border-blue-100">
+                                    <Link
+                                        href={route("patient.profile.edit")}
+                                        className="flex-1 bg-blue-500 hover:bg-blue-600 text-white text-center py-3 px-4 rounded-lg font-bold transition-all duration-200"
+                                    >
+                                        تعديل المعلومات الطبية
+                                    </Link>
+                                    <Link
+                                        href={route("profile.edit")}
+                                        className="flex-1 bg-green-500 hover:bg-green-600 text-white text-center py-3 px-4 rounded-lg font-bold transition-all duration-200"
+                                    >
+                                        تعديل معلومات الحساب
+                                    </Link>
                                 </div>
                             </div>
-                            <div className="flex items-center gap-5 mt-5">
-                                <Link
-                                    href={route("patient.profile.edit")}
-                                    className="flex justify-center items-center w-full text-blue-800  font-semibold rounded-lg hover:bg-gray-100 focus:outline-none focus:shadow-outline focus:bg-gray-100 hover:shadow-xs p-3 my-4"
-                                >
-                                    تعديل معلومات المريض
-                                </Link>
-                                <Link
-                                    href={route("profile.edit")}
-                                    className="flex justify-center items-center w-full text-blue-800  font-semibold rounded-lg hover:bg-gray-100 focus:outline-none focus:shadow-outline focus:bg-gray-100 hover:shadow-xs p-3 my-4"
-                                >
-                                    تعديل معلومات الحساب
-                                </Link>
-                            </div>
                         </div>
-
-                        <div className="my-4"></div>
                     </div>
                 </div>
             </div>
